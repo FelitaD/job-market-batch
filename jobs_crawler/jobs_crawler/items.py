@@ -14,5 +14,6 @@ class JobsCrawlerItem(scrapy.Item):
     type = scrapy.Field()
     industry = scrapy.Field()
     text = scrapy.Field()
+    remote = scrapy.Field()
 
 

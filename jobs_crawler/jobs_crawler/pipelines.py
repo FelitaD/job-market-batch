@@ -24,11 +24,13 @@ class JobsCrawlerPipeline:
         self.connection.close()
 
     def process_item(self, item, spider):
+        for field in item.fields:
+            item.setdefault(field, 'NULL')
         try:
             self.cur.execute(
-                "INSERT INTO jobs(url, title, company, location, type, industry, text) VALUES(%s,%s,%s,%s,%s,%s,%s)",
+                "INSERT INTO jobs(url, title, company, location, type, industry, text, remote) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)",
                 (item['url'][0], item['title'][0], item['company'][0], item['location'][0], item['type'][0],
-                 item['industry'][0], item['text'][0]))
+                 item['industry'][0], item['text'][0], item['remote'][0]))
             self.connection.commit()
         except:
             self.connection.rollback()
