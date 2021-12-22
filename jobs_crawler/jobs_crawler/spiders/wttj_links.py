@@ -1,14 +1,12 @@
-import math
-import re
 import scrapy
 from scrapy.crawler import CrawlerProcess
-from scrapy.loader import ItemLoader
 
-from jobs_crawler.jobs_crawler.items import JobsCrawlerItem
-from itemloaders.processors import MapCompose, Join
 
 
 class WttjLinksSpider(scrapy.Spider):
+    """
+    This Spider is used to render Javascript. It outputs all job links into a file.
+    """
     name = 'wttj_links'
     start_urls = ['https://www.welcometothejungle.com/fr/jobs?page={page_number}&aroundQuery=&query=data%20engineer&refinementList%5Bcontract_type_names.fr%5D%5B%5D=CDI&refinementList%5Bcontract_type_names.fr%5D%5B%5D=CDD%20%2F%20Temporaire&refinementList%5Bcontract_type_names.fr%5D%5B%5D=Autres&refinementList%5Bcontract_type_names.fr%5D%5B%5D=VIE&refinementList%5Bcontract_type_names.fr%5D%5B%5D=Freelance']
 
@@ -52,22 +50,6 @@ class WttjLinksSpider(scrapy.Spider):
                     f.write(str(self.links))
 
         await page.close()
-
-    def parse_job(self, response):
-        l = ItemLoader(item=JobsCrawlerItem(), response=response)
-        l.add_value('url', response.url)
-        l.add_value('title', response.xpath('//*[text()="Le poste"]/parent::h4/following-sibling::h4/text()').get())
-        l.add_value('company', response.xpath('//*[text()="La tribu"]/parent::h4/following-sibling::a//text()').get())
-        l.add_value('remote', response.xpath('//*[@name="remote"]/parent::span/following-sibling::span//text()').get())
-        l.add_value('location',
-                    response.xpath('//*[@name="location"]/parent::span/following-sibling::span/text()').get())
-        l.add_value('type',
-                    response.xpath('//*[@name="contract"]/parent::span/following-sibling::span/span/text()').get())
-        l.add_value('industry', response.xpath('//*[@name="tag"]/parent::span/following-sibling::span/text()').get())
-        l.add_value('text',
-                    response.xpath('//h2/following-sibling::div//text()').getall(),
-                    Join('\n'))
-        yield l.load_item()
 
 
 if __name__ == '__main__':

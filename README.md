@@ -18,3 +18,8 @@ Scrapy's Item Pipeline stores data into a PostgreSQL database.
 The database *job_market* contains at first one table *jobs*.
 The columns are id (serial), url (unique), title (not null), company, location, type, industry and text.
 
+### 3. Automation with cron jobs
+Scripts contain execution of spiders. They are then scheduled with crontab.
+
+### 4. Streamlined ingestion with Pandas
+Read from database to do text analysis.

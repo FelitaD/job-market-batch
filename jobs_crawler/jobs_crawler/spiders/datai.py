@@ -9,6 +9,9 @@ from itemloaders.processors import MapCompose, Join
 
 
 class DataiSpider(scrapy.Spider):
+    """
+    Spider designed to scrape datAI.jobs website.
+    """
     name = 'datai'
     start_urls = ['https://datai.jobs/jobs/?s=data+engineer&post_type=job_listing&search_location'
                   '&filter_job_listing_region=europe&query_type_job_listing_region=or']
@@ -28,9 +31,9 @@ class DataiSpider(scrapy.Spider):
         """ Parse all pages of jobs listing and access individual job pages. """
         jobs_page = response.xpath('//*[@class="job_listings list"]/li/a/@href').getall()
         for job_page in jobs_page:
-            yield scrapy.Request(job_page, self.parse_job_page)
+            yield scrapy.Request(job_page, self.yield_job_item)
 
-    def parse_job_page(self, response):
+    def yield_job_item(self, response):
         l = ItemLoader(item=JobsCrawlerItem(), response=response)
         l.add_value('url', response.url)
         l.add_value('title', response.xpath('//*[@class="site-content-page-title"]/text()').get())
