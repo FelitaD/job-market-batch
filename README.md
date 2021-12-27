@@ -1,7 +1,8 @@
 # Data Engineering Job Market
 
 ## Description
-Pipeline processing data on data engineering job market in Europe.
+This project is aimed at building a pipeline while discovering the tools used in data engineering. 
+The data being processed is data engineering jobs openings in Europe scraped from different websites.
 
 ## Architecture
 
@@ -21,5 +22,11 @@ The columns are id (serial), url (unique), title (not null), company, location, 
 ### 3. Automation with cron jobs
 Scripts contain execution of spiders. They are then scheduled with crontab.
 
-### 4. Streamlined ingestion with Pandas
-Read from database to do text analysis.
+### 4.a Streamlined ingestion with Pandas
+Read from database to do same basic queries as in psql but with pandas.
+
+### 4.b Synchronization PostgreSQL - Elasticsearch with Logstash
+The data that would be the more interesting to analyse is contained in the job openings' text.
+For this, Elasticserch will allow us to do some analytics and particularly aggregation of the most frequent terms.
+The main goal is to know which technologies are the most in demand for Data Engineer positions in France / Europe.
+

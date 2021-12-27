@@ -3,6 +3,7 @@ import math
 import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.crawler import CrawlerProcess
+from datetime import datetime
 
 from jobs_crawler.jobs_crawler.items import JobsCrawlerItem
 from itemloaders.processors import MapCompose, Join
@@ -46,10 +47,20 @@ class DataiSpider(scrapy.Spider):
                                                ')').get())
         l.add_value('text', response.xpath('//*[@class="single-job-listing__description job-description"]//text()').getall(),
                     Join(''))
+        l.add_value('created_at', datetime.now())
         return l.load_item()
 
 
 if __name__ == '__main__':
-    process = CrawlerProcess()
+    process = CrawlerProcess(
+        settings={
+            'ROBOTSTXT_OBEY': False,
+            'ITEM_PIPELINES': {'jobs_crawler.jobs_crawler.pipelines.JobsCrawlerPipeline': 300, },
+            'AUTOTHROTTLE_ENABLED': True,
+            'AUTOTHROTTLE_TARGET_CONCURRENCY': 1,
+            'AUTOTHROTTLE_START_DELAY': 5,
+            'AUTOTHROTTLE_MAX_DELAY': 60
+        }
+    )
     process.crawl(DataiSpider)
     process.start()

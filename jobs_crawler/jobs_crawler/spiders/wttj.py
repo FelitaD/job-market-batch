@@ -1,5 +1,8 @@
+#!/Users/donor/PycharmProjects/de_job_market/venv/bin/python3.8
+
 import scrapy
 import ast
+from datetime import datetime
 
 from itemloaders import ItemLoader
 from scrapy.crawler import CrawlerProcess
@@ -16,10 +19,10 @@ class WttjSpider(scrapy.Spider):
     """
     name = 'wttj'
 
-    def extract_links(self):
+    @staticmethod
+    def extract_links():
         with open('wttj_links.txt', 'r') as f:
             links = ast.literal_eval(f.read())
-            print(len(links))
             return links
 
     def start_requests(self):
@@ -43,6 +46,7 @@ class WttjSpider(scrapy.Spider):
                     response.xpath('//*[@name="tag"]/parent::span/following-sibling::span/text()').get())
         l.add_value('text',
                     response.xpath('//h2/following-sibling::div//text()').getall(), Join())
+        l.add_value('created_at', datetime.now())
         yield l.load_item()
 
 
