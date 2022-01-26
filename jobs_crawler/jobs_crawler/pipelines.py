@@ -1,6 +1,6 @@
-# useful for handling different item types with a single interface
-# from itemadapter import ItemAdapter
 import psycopg2
+
+from config.definitions import JOB_MARKET_DB_PWD, JOB_MARKET_DB_USER
 
 
 class JobsCrawlerPipeline:
@@ -11,8 +11,8 @@ class JobsCrawlerPipeline:
 
     def open_spider(self, spider):
         hostname = 'localhost'
-        username = 'donor'
-        password = 'jaimelachatteetlepate'
+        username = JOB_MARKET_DB_USER
+        password = JOB_MARKET_DB_PWD
         database = 'job_market'
         self.connection = psycopg2.connect(
             host=hostname, user=username, password=password,

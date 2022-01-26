@@ -1,5 +1,3 @@
-#!/Users/donor/PycharmProjects/de_job_market/venv/bin/python3.8
-
 import scrapy
 import ast
 from datetime import datetime

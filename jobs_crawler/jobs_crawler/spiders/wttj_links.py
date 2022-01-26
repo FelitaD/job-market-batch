@@ -1,8 +1,5 @@
-#!/Users/donor/PycharmProjects/de_job_market/venv/bin/python3.8
-
 import scrapy
 from scrapy.crawler import CrawlerProcess
-
 
 
 class WttjLinksSpider(scrapy.Spider):
