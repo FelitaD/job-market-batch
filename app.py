@@ -8,7 +8,6 @@ jobs = []
 
 
 class Job(Resource):
-
     def get(self, job_id):
         job = next(filter(lambda x: x['job_id'] == job_id, jobs), None)
         return {'job': job}, 200 if job else 404
@@ -26,6 +25,16 @@ class Job(Resource):
         global jobs
         jobs = list(filter(lambda x: x['job_id'] != job_id, jobs))
         return {'message': 'Job deleted'}
+
+    def put(self, job_id):
+        data = request.get_json()
+        job = next(filter(lambda x: x['job_id'] == job_id, jobs), None)
+        if job is None:
+            job = {'job_id': job_id, 'remote': data['remote'], 'company': data['company']}
+            jobs.append(job)
+        else:
+            job.update(data)
+        return job
 
 
 class JobList(Resource):
