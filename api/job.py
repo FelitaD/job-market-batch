@@ -9,14 +9,23 @@ class Job(Resource):
                         type=str,
                         required=True,
                         help='This field cannot be left blank !')
-    parser.add_argument('remote')
+    parser.add_argument('remote',
+                        type=int,
+                        required=False)
 
     @jwt_required()
     def get(self, job_id):
-        connection = sqlite3.connect('data.dv')
+        connection = sqlite3.connect('/Users/donor/PycharmProjects/DE_job_market/api/data.db')
         cursor = connection.cursor()
 
-        query = "SELECT * FROM jobs WHERE "
+        query = "SELECT * FROM jobs WHERE id = ?"
+        result = cursor.execute(query, (job_id,))
+        row = result.fetchone()
+        connection.close()
+
+        if row:
+            return {'job': {'company': row[0], 'remote': row[1]}}
+        return {'message': 'Item not found'}, 404
 
     def post(self, job_id):
         if next(filter(lambda x: x['job_id'] == job_id, jobs), None) is not None:

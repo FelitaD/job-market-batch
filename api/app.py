@@ -4,7 +4,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
 from user import UserRegister, UserLogin
-from item import Job, JobList
+from job import Job, JobList
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
