@@ -10,7 +10,5 @@ cursor.execute(create_table)
 create_table = "CREATE TABLE IF NOT EXISTS jobs (id INTEGER PRIMARY KEY, company text, remote int)"
 cursor.execute(create_table)
 
-cursor.execute("INSERT INTO jobs VALUES (NULL, 'test_inc', 1)")
-
 connection.commit()
 connection.close()
