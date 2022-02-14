@@ -19,20 +19,14 @@ class UserRegister(Resource):
         if UserModel.find_by_username(data['username']):
             return {'message': 'A user with that username already exists'}, 400
 
-        connection = sqlite3.connect('/Users/donor/PycharmProjects/DE_job_market/api/data.db')
-        cursor = connection.cursor()
-
-        query = "INSERT INTO users VALUES (NULL, ?, ?)"
-        cursor.execute(query, (data['username'], data['password']))
-
-        connection.commit()
-        connection.close()
+        user = UserModel(**data)
+        user.save_to_db()
 
         return {"message": "User created succesfully."}, 201
 
 
 class UserLogin(Resource):
-    # Endpoint to authenticate
+    # Endpoint to authenticate with JWT extended
 
     @classmethod
     def post(cls):

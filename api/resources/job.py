@@ -1,8 +1,8 @@
-import sqlite3
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required
 
 from models.job import JobModel
+
 
 class Job(Resource):
     parser = reqparse.RequestParser()
@@ -29,7 +29,7 @@ class Job(Resource):
         job = JobModel(id, data['company'], data['remote'])
 
         try:
-            job.insert()
+            job.save_to_db()
         except:
             return {'message': "An error occured"}, 500
 
@@ -37,44 +37,29 @@ class Job(Resource):
 
     @jwt_required()
     def delete(self, id):
-        connection = sqlite3.connect('/Users/donor/PycharmProjects/DE_job_market/api/data.db')
-        cursor = connection.cursor()
+        job = JobModel.find_by_id(id)
+        if job:
+            job.delete_from_db()
 
-        query = "DELETE FROM jobs WHERE id = ?"
-        result = cursor.execute(query, (id,))
-        connection.commit()
-        connection.close()
-
-        return {'message': 'Job deleted'}
+        return {'message': 'Item deleted'}
 
     @jwt_required()
     def put(self, id):
         data = Job.parser.parse_args()
 
         job = JobModel.find_by_id(id)
-        updated_job = JobModel(id, data['company'], data['remote'])
 
-        if job is None :
-            try:
-                updated_job.insert()
-            except:
-                return {'message': 'Error inserting job'}, 500
-        else :
-            try:
-                updated_job.update()
-            except:
-                return {'message': 'Error updating job'}, 500
-        return updated_job.json()
+        if job is None:
+            job = JobModel(id, data['company'], data['remote'])
+        else:
+            job.company = data['company']
+            job.remote = data['remote']
+
+        job.save_to_db()
+
+        return job.json()
 
 
 class JobList(Resource):
     def get(self):
-        connection = sqlite3.connect('/Users/donor/PycharmProjects/DE_job_market/api/data.db')
-        cursor = connection.cursor()
-
-        results = cursor.execute("SELECT * FROM jobs")
-        jobs = []
-        for row in results:
-            jobs.append({'id': row[0], 'company': row[1], 'remote': row[2]})
-        connection.close()
-        return {'jobs': jobs}
+        return {'jobs': [job.json() for job in JobModel.query.all()]}

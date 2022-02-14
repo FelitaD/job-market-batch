@@ -1,7 +1,17 @@
-import sqlite3
+from db import db
 
-# methods that the client don't need to interact with directly
-class JobModel:
+
+class JobModel(db.Model):
+    """
+    Internal representation of the Job resource and helper.
+    Client doesn't interact directly with these methods.
+    """
+    __tablename__ = 'jobs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    company = db.Column(db.String(80))
+    remote = db.Column(db.Integer)
+
     def __init__(self, id, company, remote):
         self.id = id
         self.company = company
@@ -12,31 +22,13 @@ class JobModel:
 
     @classmethod
     def find_by_id(cls, id):
-        connection = sqlite3.connect('/Users/donor/PycharmProjects/DE_job_market/api/data.db')
-        cursor = connection.cursor()
+        return JobModel.query.filter_by(id=id).first()  # returns JobModel instance with init attributes
 
-        query = "SELECT * FROM jobs WHERE id = ?"
-        result = cursor.execute(query, (id,))
-        row = result.fetchone()
-        connection.close()
+    def save_to_db(self):
+        """ Upsert : update or insert """
+        db.session.add(self)
+        db.session.commit()
 
-        if row:
-            return cls(row[1], row[1], row[2])
-
-    def insert(self):
-        connection = sqlite3.connect('/Users/donor/PycharmProjects/DE_job_market/api/data.db')
-        cursor = connection.cursor()
-
-        query = "INSERT INTO jobs VALUES (?, ?, ?)"
-        cursor.execute(query, (self.id, self.company, self.remote))
-        connection.commit()
-        connection.close()
-
-    def update(self):
-        connection = sqlite3.connect('/Users/donor/PycharmProjects/DE_job_market/api/data.db')
-        cursor = connection.cursor()
-
-        query = "UPDATE jobs SET company = ? WHERE id = ?"
-        cursor.execute(query, (self.company, self.id))
-        connection.commit()
-        connection.close()
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
