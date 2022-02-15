@@ -9,7 +9,8 @@ class JobModel(db.Model):
     __tablename__ = 'jobs'
 
     id = db.Column(db.Integer, primary_key=True)
-    company = db.Column(db.String(80))
+    company = db.Column(db.String(80), db.ForeignKey('companies.name'))
+    company_rel = db.relationship('CompanyModel')
     remote = db.Column(db.Integer)
 
     def __init__(self, id, company, remote):

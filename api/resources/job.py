@@ -21,12 +21,13 @@ class Job(Resource):
             return job.json()
         return {'message': 'Item not found'}, 404
 
+    @jwt_required()
     def post(self, id):
         if JobModel.find_by_id(id):
             return {'message': "A job with id '{}' already exists.".format(id)}, 400  # Bad Request, client's fault (should have checked if item existed)
 
         data = Job.parser.parse_args()
-        job = JobModel(id, data['company'], data['remote'])
+        job = JobModel(id, **data)
 
         try:
             job.save_to_db()
@@ -50,7 +51,7 @@ class Job(Resource):
         job = JobModel.find_by_id(id)
 
         if job is None:
-            job = JobModel(id, data['company'], data['remote'])
+            job = JobModel(id, **data)
         else:
             job.company = data['company']
             job.remote = data['remote']
