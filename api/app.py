@@ -3,14 +3,16 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from datetime import datetime
 
-from resources.user import UserRegister, UserLogin
-from resources.job import Job, JobList
-from resources.company import Company, CompanyList
-from db import db
+from api.resources.user import UserRegister, UserLogin
+from api.resources.job import Job, JobList
+from api.resources.company import Company, CompanyList
+from api.db import db
+from config.definitions import JOB_MARKET_DB_PWD, JOB_MARKET_DB_USER
+
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{JOB_MARKET_DB_USER}:{JOB_MARKET_DB_PWD}@localhost:5432/job_market'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # library has its own tracker
 app.config['SECRET_KEY'] = 'super-secret'
 jwt = JWTManager(app)

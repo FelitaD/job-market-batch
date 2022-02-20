@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required
 
-from models.company import CompanyModel
+from api.models.company import CompanyModel
 
 
 class Company(Resource):

@@ -1,5 +1,5 @@
 import sqlite3
-from db import db
+from api.db import db
 
 # model = helper, internal / resource = external
 

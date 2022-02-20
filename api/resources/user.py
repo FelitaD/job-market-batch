@@ -4,7 +4,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token
 from flask_jwt_extended import get_jwt_identity
 from hmac import compare_digest
 
-from models.user import UserModel
+from api.models.user import UserModel
 
 _user_parser = reqparse.RequestParser() # _ you should not import it from somewhere else because private
 _user_parser.add_argument('username', type=str, required=True, help="This field cannot be blank")
