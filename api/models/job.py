@@ -1,3 +1,5 @@
+import json
+
 from api.db import db
 
 
@@ -8,18 +10,39 @@ class JobModel(db.Model):
     """
     __tablename__ = 'jobs'
 
-    id = db.Column(db.Integer, primary_key=True)
-    company = db.Column(db.String(80), db.ForeignKey('companies.name'))
-    company_rel = db.relationship('CompanyModel')
-    remote = db.Column(db.Integer)
+    id = db.Column(db.Integer)
+    url = db.Column(db.String(500), primary_key=True)
+    title = db.Column(db.String(100))
+    company = db.Column(db.String(100))
+    location = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    industry = db.Column(db.String(100))
+    remote = db.Column(db.String(100))
+    text = db.Column(db.Text)
 
-    def __init__(self, id, company, remote):
+    def __init__(self, id, url, title, company, location, remote, type, industry, created_at, text):
         self.id = id
+        self.url = url
+        self.title = title
         self.company = company
+        self.location = location
         self.remote = remote
+        self.type = type
+        self.industry = industry
+        self.text = text
 
     def json(self):
-        return {'id': self.id, 'company': self.company, 'remote': self.remote}
+        jobs = {'id': self.id,
+                'url': self.url,
+                'title': self.title,
+                'company': self.company,
+                'location': self.location,
+                'remote': self.remote,
+                'type': self.type,
+                'industry': self.industry,
+                'text': self.text
+                }
+        return jobs
 
     @classmethod
     def find_by_id(cls, id):
