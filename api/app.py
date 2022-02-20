@@ -29,14 +29,11 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/comments/')
-def comments():
-    comments = ['This is the first comment.',
-                'This is the second comment.',
-                'This is the third comment.',
-                'This is the fourth comment.'
-                ]
-    return render_template('comments.html', comments=comments)
+@app.route('/jobs/')
+def jobs():
+    jobs = JobList().get().get('jobs')
+
+    return render_template('jobs.html', jobs=jobs)
 
 
 if __name__ == '__main__':

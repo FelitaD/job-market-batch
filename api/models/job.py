@@ -32,7 +32,7 @@ class JobModel(db.Model):
         self.text = text
 
     def json(self):
-        jobs = {'id': self.id,
+        return {'id': self.id,
                 'url': self.url,
                 'title': self.title,
                 'company': self.company,
@@ -42,7 +42,6 @@ class JobModel(db.Model):
                 'industry': self.industry,
                 'text': self.text
                 }
-        return jobs
 
     @classmethod
     def find_by_id(cls, id):
