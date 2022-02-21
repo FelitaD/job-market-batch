@@ -61,7 +61,7 @@ if __name__ == '__main__':
             },
             "CONCURRENT_REQUESTS": 32,
             'ROBOTSTXT_OBEY': False,
-            'ITEM_PIPELINES': {'jobs_crawler.jobs_crawler.pipelines.JobsCrawlerPipeline': 300,},
+            'ITEM_PIPELINES': {'crawler.crawler.pipelines.JobsCrawlerPipeline': 300,},
             'AUTOTHROTTLE_ENABLED': True,
             'AUTOTHROTTLE_TARGET_CONCURRENCY': 1,
             'AUTOTHROTTLE_START_DELAY': 5,

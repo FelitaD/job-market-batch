@@ -1,4 +1,6 @@
 1_recap_of_code/**
-/information_extraction/output/
-/information_extraction/train_data/
-/information_extraction/config.cfg
+/nlp/output/
+/nlp/train_data/
+/nlp/config.cfg
+/nlp/output_english/
+/nlp/english_config.cfg

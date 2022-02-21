@@ -5,7 +5,7 @@ from scrapy.loader import ItemLoader
 from scrapy.crawler import CrawlerProcess
 from datetime import datetime
 
-from jobs_crawler.jobs_crawler.items import JobsCrawlerItem
+from crawler.jobs_crawler.items import JobsCrawlerItem
 from itemloaders.processors import MapCompose, Join
 
 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     process = CrawlerProcess(
         settings={
             'ROBOTSTXT_OBEY': False,
-            'ITEM_PIPELINES': {'jobs_crawler.jobs_crawler.pipelines.JobsCrawlerPipeline': 300, },
+            'ITEM_PIPELINES': {'crawler.crawler.pipelines.JobsCrawlerPipeline': 300, },
             'AUTOTHROTTLE_ENABLED': True,
             'AUTOTHROTTLE_TARGET_CONCURRENCY': 1,
             'AUTOTHROTTLE_START_DELAY': 5,

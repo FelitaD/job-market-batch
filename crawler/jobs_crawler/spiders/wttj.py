@@ -7,13 +7,13 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.loader import ItemLoader
 from itemloaders.processors import Join
 
-from jobs_crawler.jobs_crawler.items import JobsCrawlerItem
+from crawler.jobs_crawler.items import JobsCrawlerItem
 
 
 class WttjSpider(scrapy.Spider):
     """
     Spider to scrape jobs information on Welcome to the Jungle Website.
-    The individual page are not rendered with Javascript so it only uses Scrapy.
+    The individual pages are not rendered with Javascript so it only uses Scrapy.
     """
     name = 'wttj'
 
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     process = CrawlerProcess(
         settings={
             'ROBOTSTXT_OBEY': False,
-            'ITEM_PIPELINES': {'jobs_crawler.jobs_crawler.pipelines.JobsCrawlerPipeline': 300, },
+            'ITEM_PIPELINES': {'crawler.crawler.pipelines.JobsCrawlerPipeline': 300, },
             'AUTOTHROTTLE_ENABLED': True,
             'AUTOTHROTTLE_TARGET_CONCURRENCY': 1,
             'AUTOTHROTTLE_START_DELAY': 5,
