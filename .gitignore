@@ -1,1 +1,4 @@
 1_recap_of_code/**
+/information_extraction/output/
+/information_extraction/train_data/
+/information_extraction/config.cfg
