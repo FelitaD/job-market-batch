@@ -1,6 +1,6 @@
-from api.db import db
 from flask import Flask
 
+from api.db import db
 from config.definitions import JOB_MARKET_DB_PWD, JOB_MARKET_DB_USER
 
 

@@ -2,12 +2,11 @@ import scrapy
 import ast
 from datetime import datetime
 
-from itemloaders import ItemLoader
 from scrapy.crawler import CrawlerProcess
 from scrapy.loader import ItemLoader
 from itemloaders.processors import Join
 
-from crawler.jobs_crawler.items import JobsCrawlerItem
+from etl.extract.jobs_crawler.items import JobsCrawlerItem
 
 
 class WttjSpider(scrapy.Spider):
@@ -52,7 +51,7 @@ if __name__ == '__main__':
     process = CrawlerProcess(
         settings={
             'ROBOTSTXT_OBEY': False,
-            'ITEM_PIPELINES': {'crawler.crawler.pipelines.JobsCrawlerPipeline': 300, },
+            'ITEM_PIPELINES': {'extract.extract.pipelines.JobsCrawlerPipeline': 300, },
             'AUTOTHROTTLE_ENABLED': True,
             'AUTOTHROTTLE_TARGET_CONCURRENCY': 1,
             'AUTOTHROTTLE_START_DELAY': 5,

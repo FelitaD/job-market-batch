@@ -32,7 +32,8 @@ class JobModel(db.Model):
         self.text = text
 
     def json(self):
-        return {'id': self.id,
+        return {
+                'id': self.id,
                 'url': self.url,
                 'title': self.title,
                 'company': self.company,
