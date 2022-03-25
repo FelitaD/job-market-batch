@@ -12,7 +12,7 @@ class NERTrainer:
 
     def init_config(self):
         os.system(f'python3 -m spacy init config {self.config_file} --pipeline {self.pipeline} '
-                  f'--lang {self.language} --force')
+                  f'--lang {self.language} --force ')
 
     def train(self):
         os.system(f'python3 -m spacy train {self.config_file} --output {self.model_output_path} '

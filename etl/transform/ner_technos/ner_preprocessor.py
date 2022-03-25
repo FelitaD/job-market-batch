@@ -14,25 +14,26 @@ class NERPreprocessor:
     def __init__(self, jobs, language = 'en'):
         self.language = language
         self.jobs = jobs
-        self.technos = {'Github', 's3', 'Shell', 'Py torch', 'Neo4J', 'AWS S3', 'Python', 'Kinesis', 'Unix', 'CircleCI',
-                       'CloudSQL', 'PubSub', 'HTTP', 'HBase', 'K8S', 'Flyte', 'MySQL', 'Redis', 'Salt', 'Redshift Spectrum',
-                       'SQL Server', 'MS-SQL', 'Athena', 'k8s', 'Spark', 'Quicksilver', 'Matillion WTL', 'Vitess', 'Looker',
-                       'nodejs', 'GraphQL', 'SparkSQL', 'Kibana', 'mlflow', 'PyTorch', 'DataStudio', 'MongoDB',
-                       'CockroachDB', 'Beam', 'Oracle', 'Google Cloud Platform', 'SQL server', 'Microsoft Azure', 'GCP',
-                       'ElasticSearch', 'Apollo', 'Numpy', 'Pagerduty', 'Apache Airflow', 'Bash', 'Fivetran', 'Mongo',
-                       'NoSQL', 'Datadog', 'MapReduce', 'Elasticsearch', 'Kubeflow', 'Unix Shell', 'data vault', 'AWS Glue',
-                       'Jenkins', 'python', 'Akka', 'PQL', 'DAX', '(No)SQL', 'Scikit Learn', 'Metabase', 'Snowflake',
-                       'SageMaker', 'Hadoop', 'Docker', 'Kubernetes', 'Reddis', 'Istio', 'StitchData', 'Glue',
-                       'Apache Kafka', 'H20', 'SAP', 'Grafana', 'Pig', 'SQL', 'SPAR', 'gRPC', 'MxNet', 'MAPR', 'OpenTSDB',
-                       'UNIX', 'Flink', 'S3', 'Protobuf', 'Go lang', 'HDFS', 'Java', 'Linux', 'Ruby', 'Postgres',
-                       'Cassandra', 'IAM', 'Scala', 'Perl', 'Dataflow', 'airflow', 'Airbyte', 'Microsoft SSIS', 'Node',
-                       'BigQuery', 'C#', 'Javascript', 'Kafka', 'R', 'TensorFlow', 'Microstrategy', 'Pub/Sub', 'ETL',
-                       'DynamoDB', 'Bigtable', 'Prometheus', 'Airflow', 'EMR', 'NiFi', 'Typescript', 'C/C\\+\\+',
-                       'RabbitMQ', 'Synapse', 'Scipy', 'Hive', 'Astronomer', 'Luigi', 'DataBuildTool', 'Tensorflow',
-                       'PowerBI', 'Redshift', 'Codecov', 'Django', 'Spanner', 'EC2', 'Kimball', 'Ceph', 'dbt', 'Golang',
-                       'Go', 'Git', 'dataiku', 'Informatica', 'Tableau', 'AWS', 'React', 'Matillion', 'Qlikview',
-                       'Apache Beam', 'LAMP', 'PHP', 'Google Cloud', 'Stackdriver', 'AWS Redshift', 'Talend', 'Azure',
-                       'Pandas', 'PostgreSQL', 'Celery', 'git', 'Gitlab', 'VizQL', 'ClickHouse'}
+        self.technos = {'(No)SQL', 'AWS', 'AWS Glue', 'AWS Redshift', 'AWS S3', 'Airbyte', 'Airflow', 'Akka',
+                        'Apache Airflow', 'Apache Beam', 'Apache Kafka', 'Apollo', 'Astronomer', 'Athena', 'Azure',
+                        'Bash', 'Beam', 'BigQuery', 'Bigtable', 'C#', 'C/C\\+\\+', 'Cassandra', 'Celery', 'Ceph',
+                        'CircleCI', 'ClickHouse', 'CloudSQL', 'CockroachDB', 'Codecov', 'DAX', 'DataBuildTool',
+                        'DataStudio', 'Datadog', 'Dataflow', 'Django', 'Docker', 'DynamoDB', 'EC2', 'EMR', 'ETL',
+                        'ElasticSearch', 'Elasticsearch', 'Fivetran', 'Flink', 'Flyte', 'GCP', 'Git', 'Github',
+                        'Gitlab', 'Glue', 'Go', 'Go lang', 'Golang', 'Google Cloud', 'Google Cloud Platform', 'Grafana',
+                        'GraphQL', 'H20', 'HBase', 'HDFS', 'HTTP', 'Hadoop', 'Hive', 'IAM', 'Informatica', 'Istio',
+                        'Java', 'Javascript', 'Jenkins', 'K8S', 'Kafka', 'Kibana', 'Kimball', 'Kinesis', 'Kubeflow',
+                        'Kubernetes', 'LAMP', 'Linux', 'Looker', 'Luigi', 'MAPR', 'MS-SQL', 'MapReduce', 'Matillion',
+                        'Matillion WTL', 'Metabase', 'Microsoft Azure', 'Microsoft SSIS', 'Microstrategy', 'Mongo',
+                        'MongoDB', 'MxNet', 'MySQL', 'Neo4J', 'NiFi', 'NoSQL', 'Node', 'Numpy', 'OpenTSDB', 'Oracle',
+                        'PHP', 'PQL', 'Pagerduty', 'Pandas', 'Perl', 'Pig', 'PostgreSQL', 'Postgres', 'PowerBI',
+                        'Prometheus', 'Protobuf', 'Pub/Sub', 'PubSub', 'Py torch', 'PyTorch', 'Python', 'Qlikview',
+                        'Quicksilver', 'R', 'RabbitMQ', 'React', 'Reddis', 'Redis', 'Redshift', 'Redshift Spectrum',
+                        'Ruby', 'S3', 'SAP', 'SPAR', 'SQL', 'SQL Server', 'SQL server', 'SageMaker', 'Salt', 'Scala',
+                        'Scikit Learn', 'Scipy', 'Shell', 'Snowflake', 'Spanner', 'Spark', 'SparkSQL', 'Stackdriver',
+                        'StitchData', 'Synapse', 'Tableau', 'Talend', 'TensorFlow', 'Tensorflow', 'Typescript', 'UNIX',
+                        'Unix', 'Unix Shell', 'Vitess', 'VizQL', 'airflow', 'data vault', 'dataiku', 'dbt', 'gRPC',
+                        'git', 'k8s', 'mlflow', 'nodejs', 'python', 's3'}
         self.train_data_path = os.path.join(PROJECT_PATH, 'etl/transform/data/train_data')
 
     def prepare_training(self):
