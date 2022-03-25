@@ -1,6 +1,1 @@
-1_recap_of_code/**
-/etl/transform/output/
-/etl/transform/ner_technos/train_data/
-/etl/transform/config.cfg
-/etl/transform/ner_technos/output_english/
-/etl/transform/ner_technos/english_config.cfg
+/etl/transform/data/
