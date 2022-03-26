@@ -6,7 +6,7 @@ from spacy import displacy
 from spacy.tokens import DocBin
 from tqdm import tqdm
 
-from config.definitions import PROJECT_PATH
+from config.definitions import PROJECT_PATH, TECHNOS
 
 class NERPreprocessor:
     """Prepare training data for Name Entity Recognition model of technologies in jobs' text."""
@@ -14,26 +14,7 @@ class NERPreprocessor:
     def __init__(self, jobs, language = 'en'):
         self.language = language
         self.jobs = jobs
-        self.technos = {'(No)SQL', 'AWS', 'AWS Glue', 'AWS Redshift', 'AWS S3', 'Airbyte', 'Airflow', 'Akka',
-                        'Apache Airflow', 'Apache Beam', 'Apache Kafka', 'Apollo', 'Astronomer', 'Athena', 'Azure',
-                        'Bash', 'Beam', 'BigQuery', 'Bigtable', 'C#', 'C/C\\+\\+', 'Cassandra', 'Celery', 'Ceph',
-                        'CircleCI', 'ClickHouse', 'CloudSQL', 'CockroachDB', 'Codecov', 'DAX', 'DataBuildTool',
-                        'DataStudio', 'Datadog', 'Dataflow', 'Django', 'Docker', 'DynamoDB', 'EC2', 'EMR', 'ETL',
-                        'ElasticSearch', 'Elasticsearch', 'Fivetran', 'Flink', 'Flyte', 'GCP', 'Git', 'Github',
-                        'Gitlab', 'Glue', 'Go', 'Go lang', 'Golang', 'Google Cloud', 'Google Cloud Platform', 'Grafana',
-                        'GraphQL', 'H20', 'HBase', 'HDFS', 'HTTP', 'Hadoop', 'Hive', 'IAM', 'Informatica', 'Istio',
-                        'Java', 'Javascript', 'Jenkins', 'K8S', 'Kafka', 'Kibana', 'Kimball', 'Kinesis', 'Kubeflow',
-                        'Kubernetes', 'LAMP', 'Linux', 'Looker', 'Luigi', 'MAPR', 'MS-SQL', 'MapReduce', 'Matillion',
-                        'Matillion WTL', 'Metabase', 'Microsoft Azure', 'Microsoft SSIS', 'Microstrategy', 'Mongo',
-                        'MongoDB', 'MxNet', 'MySQL', 'Neo4J', 'NiFi', 'NoSQL', 'Node', 'Numpy', 'OpenTSDB', 'Oracle',
-                        'PHP', 'PQL', 'Pagerduty', 'Pandas', 'Perl', 'Pig', 'PostgreSQL', 'Postgres', 'PowerBI',
-                        'Prometheus', 'Protobuf', 'Pub/Sub', 'PubSub', 'Py torch', 'PyTorch', 'Python', 'Qlikview',
-                        'Quicksilver', 'R', 'RabbitMQ', 'React', 'Reddis', 'Redis', 'Redshift', 'Redshift Spectrum',
-                        'Ruby', 'S3', 'SAP', 'SPAR', 'SQL', 'SQL Server', 'SQL server', 'SageMaker', 'Salt', 'Scala',
-                        'Scikit Learn', 'Scipy', 'Shell', 'Snowflake', 'Spanner', 'Spark', 'SparkSQL', 'Stackdriver',
-                        'StitchData', 'Synapse', 'Tableau', 'Talend', 'TensorFlow', 'Tensorflow', 'Typescript', 'UNIX',
-                        'Unix', 'Unix Shell', 'Vitess', 'VizQL', 'airflow', 'data vault', 'dataiku', 'dbt', 'gRPC',
-                        'git', 'k8s', 'mlflow', 'nodejs', 'python', 's3'}
+        self.technos = TECHNOS
         self.train_data_path = os.path.join(PROJECT_PATH, 'etl/transform/data/train_data')
 
     def prepare_training(self):
