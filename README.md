@@ -9,6 +9,9 @@ The data being processed is data engineering jobs openings in Europe scraped fro
 1. Python crawler
 2. PostgreSQL / MongoDB database
 
+[Database diagram](https://dbdiagram.io/d/623f46d0bed618387302d39e)
+![](job_market_v2.png)
+
 ## Details
 
 ### 1. Python crawler

@@ -20,46 +20,37 @@ class Loader:
 
         Base.metadata.create_all(engine)
         Base.metadata.bind = engine
-        db_session = sessionmaker()
-        db_session.bind = engine
-        session = db_session()
 
         for i in range(len(self.jobs[:10])):
-            title = self.jobs.loc[i, 'title']
-            url = self.jobs.loc[i, 'url']
-            _type = self.jobs.loc[i, 'type']
-            location = self.jobs.loc[i, 'location']
-            remote = self.jobs.loc[i, 'remote']
-            language = self.jobs.loc[i, 'language']
-            company_name = self.jobs.loc[i, 'company']
-            text = self.jobs.loc[i, 'text']
-            job = Job(company_name=company_name, title=title, url=url, type=_type, location=location, remote=remote, language=language, text=text)
+            company_values = tuple(self.jobs.loc[i, ['company', 'industry']].values)
+            stmt_company = '''INSERT INTO companies (name, industry) VALUES {values}
+                              ON CONFLICT (id) DO NOTHING'''
+            stmt_company = stmt_company.format(values=company_values)
 
-            industry = self.jobs.loc[i, 'industry']
-            company = Company(name=company_name, industry=industry)
+            jobs_values = tuple(self.jobs.loc[i, ['title', 'url', 'type']].values)
+            stmt_job = """INSERT INTO jobs (title, url, type) VALUES {values}
+                          ON CONFLICT (id) DO NOTHING"""
+            stmt_job = stmt_job.format(values=jobs_values)
 
-            # company.jobs.append(job)
-            try:
-                session.merge(company)
-                session.merge(job)
-            except IntegrityError:
-                session.rollback()
+            with engine.connect() as connection:
+                with connection.begin() as transaction:
+                    try:
+                        connection.execute(stmt_company)
+                        connection.execute(stmt_job)
+                    except:
+                        transaction.rollback()
+                        raise
+                    transaction.commit()
 
-            technos = ast.literal_eval(self.jobs.loc[i, 'technos'])
-            for j in range(len(technos)):
-                techno_name = technos[j]
-                category = ''
-                techno = Techno(name=techno_name, category=category)
-                try:
-                    session.merge(techno)
-                except IntegrityError:
-                    session.rollback()
-
-            session.commit()
+            # technos = self.jobs.loc[i, ['technos']].values
+            # for techno in ast.literal_eval(technos[0]):
+            #     print(techno)
 
 
-        # inspector = inspect(engine)
-        # print(inspector.get_table_names())
+
+
+
+
 
 
 Loader().load()
