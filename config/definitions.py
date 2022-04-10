@@ -2,12 +2,11 @@ import os
 from pathlib import Path
 
 PROJECT_PATH = Path(os.path.dirname(os.path.abspath(__file__))).parent
-DATA_PATH = os.path.join(PROJECT_PATH, 'etl/transform/data')
+DATA_PATH = os.path.join(PROJECT_PATH, 'elt/transform/data')
 
 JOB_MARKET_DB_PWD = os.environ['JOB_MARKET_DB_PWD']
 JOB_MARKET_DB_USER = os.environ['JOB_MARKET_DB_USER']
 DB_STRING = f"postgresql://{JOB_MARKET_DB_USER}:{JOB_MARKET_DB_PWD}@localhost:5432/job_market"
-DB_STRING_V2 = f"postgresql://{JOB_MARKET_DB_USER}:{JOB_MARKET_DB_PWD}@localhost:5432/job_market_v2"
 
 
 TECHNOS = {'(No)SQL', 'AWS', 'AWS Glue', 'AWS Redshift', 'AWS S3', 'Airbyte', 'Airflow', 'Akka',
@@ -16,7 +15,7 @@ TECHNOS = {'(No)SQL', 'AWS', 'AWS Glue', 'AWS Redshift', 'AWS S3', 'Airbyte', 'A
             'CircleCI', 'ClickHouse', 'CloudSQL', 'CockroachDB', 'Codecov', 'DAX', 'DataBuildTool',
             'DataStudio', 'Datadog', 'Dataflow', 'Django', 'Docker', 'DynamoDB', 'EC2', 'EMR', 'ETL',
             'ElasticSearch', 'Elasticsearch', 'Fivetran', 'Flink', 'Flyte', 'GCP', 'Git', 'Github',
-            'Gitlab', 'Glue', 'Go', 'Go lang', 'Golang', 'Google Cloud', 'Google Cloud Platform', 'Grafana',
+            'Gitlab', 'Glue', 'Go', 'Go lang', 'Golang', 'Google Cloud', 'Google Cloud Platform', 'GCS', 'Grafana',
             'GraphQL', 'H20', 'HBase', 'HDFS', 'HTTP', 'Hadoop', 'Hive', 'IAM', 'Informatica', 'Istio',
             'Java', 'Javascript', 'Jenkins', 'K8S', 'Kafka', 'Kibana', 'Kimball', 'Kinesis', 'Kubeflow',
             'Kubernetes', 'LAMP', 'Linux', 'Looker', 'Luigi', 'MAPR', 'MS-SQL', 'MapReduce', 'Matillion',

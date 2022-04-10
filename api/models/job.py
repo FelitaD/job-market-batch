@@ -14,21 +14,27 @@ class JobModel(db.Model):
     url = db.Column(db.String(500), primary_key=True)
     title = db.Column(db.String(100))
     company = db.Column(db.String(100))
-    location = db.Column(db.String(100))
-    type = db.Column(db.String(100))
     industry = db.Column(db.String(100))
+    stack = db.Column(db.String)
+    location = db.Column(db.String(100))
     remote = db.Column(db.String(100))
+    type = db.Column(db.String(100))
+    language = db.Column(db.String(2))
+    created_at = db.Column(db.Date)
     text = db.Column(db.Text)
 
-    def __init__(self, id, url, title, company, location, remote, type, industry, created_at, text):
+    def __init__(self, id, url, title, company, industry, stack, location, remote, _type, language, created_at, text):
         self.id = id
         self.url = url
         self.title = title
         self.company = company
+        self.industry = industry
+        self.stack = stack
         self.location = location
         self.remote = remote
-        self.type = type
-        self.industry = industry
+        self.type = _type
+        self.language = language
+        self.created_at = created_at
         self.text = text
 
     def json(self):
