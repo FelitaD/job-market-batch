@@ -11,8 +11,7 @@ class WttjLinksSpider(scrapy.Spider):
 
     BASE_URL = 'https://www.welcometothejungle.com'
 
-    def __init__(self):
-        self.links = set()
+    links = set()
 
     def start_requests(self):
         yield scrapy.Request(self.start_urls[0].format(page_number=1),
@@ -40,7 +39,6 @@ class WttjLinksSpider(scrapy.Spider):
                     job_link = await job_element.get_attribute('href')
                     job_url = self.BASE_URL + job_link
                     self.links.add(job_url)
-                print(len(self.links))
             except TimeoutError:
                 print("Cannot find a next button on ", page.url)
                 break

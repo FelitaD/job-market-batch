@@ -32,9 +32,8 @@ class SpotifyLinksSpider(scrapy.Spider):
             if href.startswith('/jobs/'):
                 self.spotify_links.add('https://www.lifeatspotify.com' + href)
 
-        return self.spotify_links
-        # with open('spotify_links.txt', 'w') as f:
-        #     f.write(str(self.spotify_links))
+        with open('spotify_links.txt', 'w') as f:
+            f.write(str(self.spotify_links))
 
 
 if __name__ == '__main__':
@@ -53,5 +52,5 @@ if __name__ == '__main__':
             'AUTOTHROTTLE_MAX_DELAY': 60
         }
     )
-    process.crawl(SpotifyLinksSpider, **context)
+    process.crawl(SpotifyLinksSpider)
     process.start()

@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 import json
 
 from config.definitions import DB_STRING, DATA_PATH
-from config.job_market_schema import ProcessedJob, Base
+from config.postgres_schema import ProcessedJob, Base
 
 
 def run_loader(**context):

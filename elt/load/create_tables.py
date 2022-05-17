@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 import json
 
 from config.definitions import DB_STRING, DATA_PATH
-from config.job_market_schema import RawJob, ProcessedJob, Base
+from config.postgres_schema import RawJob, ProcessedJob, Base
 
 
 def create_tables():
