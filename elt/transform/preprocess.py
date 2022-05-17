@@ -9,37 +9,34 @@ from config.definitions import DB_STRING
 
 class Preprocessor:
 
-    def __init__(self):
+    def __init__(self, number_of_jobs):
         self.engine = create_engine(DB_STRING)
-        self.jobs = pd.read_sql('jobs', self.engine)
+        self.jobs = pd.read_sql('raw_jobs', self.engine)
+        if number_of_jobs:
+            self.jobs = self.jobs[:number_of_jobs]
 
-    def preprocess(self, **context):
+    def preprocess(self):
         self.jobs.drop('id', axis=1, inplace=True)
         self.jobs = self.jobs.convert_dtypes()
         self.jobs['created_at'] = pd.to_datetime(self.jobs['created_at'])
         self.jobs['remote'].replace('N', np.nan, inplace=True)
         self.jobs['title'] = self.jobs['title'].apply(lambda x: self.preprocess_title(x))
-        self.jobs = self.detect_and_delete_language(self.jobs)
+        self.jobs['language'] = self.jobs['text'].apply(lambda x: detect(x))
+        self.jobs.drop(self.jobs[(self.jobs['language'] != 'en') & (self.jobs['language'] != 'fr')].index, axis=0, inplace=True)
         self.jobs['text'] = self.jobs['text'].apply(lambda x: self.preprocess_text(x))
-        self.jobs.reset_index(inplace=True)
+        self.jobs.reset_index(inplace=True, drop=True)
 
     @staticmethod
     def preprocess_title(title):
-        # (H/F), H/F, H / F, (F/H), F/H, (M/F), M/F, (F/M), F/M, M/W, (HF),(M/F/D), (F/H/X), (m/f/d), (m/w/d), (H/S/T)
+        # Remove (H/F), H/F, H / F, (F/H), F/H, (M/F), M/F, (F/M), F/M, M/W, (HF),(M/F/D), (F/H/X), (m/f/d), (m/w/d), (H/S/T)
         gender_regex = '[\(]?[HFMWDXmfdwST]{1}[\s]?[\/]{1}[\s]?[HFMWDXmfdwST]{1}[\)]?[\/]?[HFMWDXmfdwST]?[\)]?'
         title = re.sub(gender_regex, '', title)
-        # Empty parenthesis
+        # Remove empty parenthesis
         title = re.sub('\([\s]?\)', '', title)
-        # Special characters
+        # Remove | #
         title = re.sub('[|#]', '', title)
         title = title.strip()
         return title
-
-    @staticmethod
-    def detect_and_delete_language(jobs):
-        jobs['language'] = jobs['text'].apply(lambda x: detect(x))
-        jobs.drop(jobs[(jobs['language'] != 'en') & (jobs['language'] != 'fr')].index, axis=0, inplace=True)
-        return jobs
 
     @staticmethod
     def preprocess_text(text):
