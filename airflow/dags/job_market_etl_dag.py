@@ -70,6 +70,7 @@ with DAG(dag_id=dag_id,
         python_callable=run_loader,
     )
 
+
 create_tables >> [spotify_links_spider, wttj_links_spider, datai_spider]
 
 wttj_links_spider >> wttj_spider

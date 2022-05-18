@@ -10,6 +10,21 @@ import pandas as pd
 Base = declarative_base()
 
 
+class RawJob(Base):
+    __tablename__ = 'raw_jobs'
+
+    id = Column(Integer, primary_key=True)
+    url = Column(String(400), nullable=False, unique=True)
+    title = Column(String(100), nullable=False)
+    company = Column(String(100), nullable=False)
+    industry = Column(String(100))
+    location = Column(String(100))
+    remote = Column(String(100))
+    type = Column(String(20))
+    created_at = Column(Date)
+    text = Column(String)
+
+
 class ProcessedJob(Base):
     __tablename__ = 'processed_jobs'
 
@@ -27,17 +42,17 @@ class ProcessedJob(Base):
     text = Column(String)
 
 
-class RawJob(Base):
-    __tablename__ = 'raw_jobs'
+class PivottedJob(Base):
+    __tablename__ = 'pivotted_jobs'
 
     id = Column(Integer, primary_key=True)
     url = Column(String(400), nullable=False, unique=True)
     title = Column(String(100), nullable=False)
     company = Column(String(100), nullable=False)
-    industry = Column(String(100))
     location = Column(String(100))
+    type = Column(String(100))
+    industry = Column(String(100))
     remote = Column(String(100))
-    type = Column(String(20))
     created_at = Column(Date)
-    text = Column(String)
-
+    language = Column(String(2))
+    technos = Column(String(100))

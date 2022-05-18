@@ -31,5 +31,6 @@ def transform():
     # ner_trainer.train()
 
 
-if __name__ == '__main__':
-    transform()
+# if __name__ == '__main__':
+#
+#     transform()
