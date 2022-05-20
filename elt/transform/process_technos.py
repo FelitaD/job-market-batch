@@ -26,10 +26,16 @@ class TechnosProcessor:
     def add_technos_from_custom_list(self):
         """Add a 'stack' column containing a list of technologies present in the text of the job posting
         then expand this list in as many columns as there are elements in the list."""
+
         self.jobs['stack'] = self.jobs['text'].apply(lambda x: self.extract_custom_technos(x))
         technos = pd.DataFrame(self.jobs['stack'].to_list())
         df = pd.merge(self.jobs, technos, left_index=True, right_index=True)
         return df
+
+    @staticmethod
+    def extract_custom_technos(text):
+        technos = [w.lower() for w in text.split(' ') if w.lower() in TECHNOS]
+        return list(set(technos))
 
     @staticmethod
     def pivot_technos(df):
@@ -55,10 +61,6 @@ class TechnosProcessor:
         df['technos'] = df['technos'].map(mapper_dict)
         return df
 
-    @staticmethod
-    def extract_custom_technos(text):
-        technos = [w.lower() for w in text.split(' ') if w.lower() in TECHNOS]
-        return list(set(technos))
 
     # def add_technos_from_model(self):
     #     self.jobs['technos'] = self.jobs['text'].apply(lambda x: self.extract_ner_technos(x))
