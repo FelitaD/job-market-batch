@@ -1,4 +1,4 @@
-CREATE SCHEMA "doc";
+CREATE SCHEMA IF NOT EXISTS "doc";
 
 CREATE TABLE "doc"."jobs" (
   "id" integer PRIMARY KEY,
@@ -20,16 +20,16 @@ CREATE TABLE "doc"."technos" (
   "category_id" integer
 );
 
-CREATE TABLE "doc"."technos_aliases" (
+CREATE TABLE "doc"."aliases" (
   "id" integer PRIMARY KEY,
   "techno_id" integer,
   "alias" varchar
 );
 
 CREATE TABLE "doc"."jobs_technos" (
-  "id" integer PRIMARY KEY,
   "job_id" integer,
-  "techno_id" integer
+  "techno_id" integer,
+  PRIMARY KEY ("job_id", "techno_id")
 );
 
 CREATE TABLE "doc"."categories" (
@@ -63,7 +63,7 @@ ALTER TABLE "doc"."jobs" ADD FOREIGN KEY ("location_id") REFERENCES "doc"."locat
 
 ALTER TABLE "doc"."technos" ADD FOREIGN KEY ("category_id") REFERENCES "doc"."categories" ("id");
 
-ALTER TABLE "doc"."technos_aliases" ADD FOREIGN KEY ("techno_id") REFERENCES "doc"."technos" ("id");
+ALTER TABLE "doc"."aliases" ADD FOREIGN KEY ("techno_id") REFERENCES "doc"."technos" ("id");
 
 ALTER TABLE "doc"."jobs_technos" ADD FOREIGN KEY ("job_id") REFERENCES "doc"."jobs" ("id");
 

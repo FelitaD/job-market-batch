@@ -14,8 +14,7 @@ class DataiSpider(scrapy.Spider):
     Spider designed to scrape datAI.jobs website.
     """
     name = 'datai'
-    start_urls = ['https://datai.jobs/jobs/?s=data+engineer&post_type=job_listing&search_location'
-                  '&filter_job_listing_region=europe&query_type_job_listing_region=or']
+    start_urls = ['https://datai.jobs/jobs/?s=data+engineer&post_type=job_listing&search_location&filter_job_listing_region=europe&query_type_job_listing_region=or']
 
     def parse(self, response):
         """ Parse 1st page of results and obtain the total number of pages to scrape. """

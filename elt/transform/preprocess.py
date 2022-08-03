@@ -10,8 +10,11 @@ from config.definitions import DB_STRING
 class Preprocessor:
 
     def __init__(self, number_of_jobs):
+        # connect to postgres database
         self.engine = create_engine(DB_STRING)
+        # retrieve raw data into a dataframe
         self.jobs = pd.read_sql('raw_jobs', self.engine)
+        # limit length of data for testing
         if number_of_jobs:
             self.jobs = self.jobs[:number_of_jobs]
 

@@ -23,7 +23,6 @@ class JobsCrawlerPipeline:
         self.cur.close()
         self.connection.close()
 
-
     def process_item(self, item, spider):
         for field in item.fields:
             item.setdefault(field, 'NULL')
