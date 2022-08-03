@@ -12,6 +12,38 @@ The data being processed is data engineering jobs openings in Europe scraped fro
 [Database diagram](https://dbdiagram.io/d/623f46d0bed618387302d39e)
 ![](job_market_v2.png)
 
+## Running with Airflow
+
+### Locally
+- Change airflow home in bash/zsh profile
+
+```export AIRFLOW_HOME=/Users/donor/PycharmProjects/job-market-batch/airflow```
+
+- Install Airflow using the constraints file
+
+```AIRFLOW_VERSION=2.3.3```
+
+```PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"```
+
+For example: 3.7
+
+```CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"```
+
+For example: https://raw.githubusercontent.com/apache/airflow/constraints-2.3.3/constraints-3.7.txt
+
+```pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"```
+
+- The Standalone command will initialise the database, make a user, and start all components for you.
+
+```airflow standalone```
+
+- Visit localhost:8080 in the browser and use the admin account details shown on the terminal to login.
+
+### Docker + project on host
+
+
+
+
 ## Details
 
 ### 1. Python crawler

@@ -6,8 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.models.connection import Connection
 from airflow.sensors.filesystem import FileSensor
 
-
-dag_id = 'DE_job_market'
+dag_id = 'job-market-batch'
 
 default_args = {
     'start_date': datetime(2022, 4, 1)
@@ -20,7 +19,7 @@ with DAG(dag_id=dag_id,
          catchup=False,
          schedule_interval='@daily') as dag:
 
-    from elt.load.create_tables import create_tables
+    from data_engineering_job_market_package_FelitaD.elt.load.create_tables import create_tables
     create_tables = PythonOperator(
         task_id='create_tables',
         python_callable=create_tables
@@ -58,18 +57,17 @@ with DAG(dag_id=dag_id,
             do_xcom_push=False
         )
 
-    from elt.transform.transform import transform
+    from data_engineering_job_market_package_FelitaD.elt.transform import transform
     transformer = PythonOperator(
         task_id='transformer',
         python_callable=transform,
     )
 
-    from elt.load.load import run_loader
+    from data_engineering_job_market_package_FelitaD.elt.load.load import run_loader
     loader = PythonOperator(
         task_id='loader',
         python_callable=run_loader,
     )
-
 
 create_tables >> [spotify_links_spider, wttj_links_spider, datai_spider]
 
