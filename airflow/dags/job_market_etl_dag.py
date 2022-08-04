@@ -29,44 +29,43 @@ with DAG(dag_id=dag_id,
 
         wttj_links_spider = BashOperator(
             task_id='wttj_links_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/DE_job_market/elt/extract/jobs_crawler/spiders'
+            bash_command='python3 /Users/donor/PycharmProjects/job-market-pkg/src'
+                         '/data_engineering_job_market_package_FelitaD/elt/extract/jobs_crawler/spiders'
                          '/wttj_links.py',
         )
 
         spotify_links_spider = BashOperator(
             task_id='spotify_links',
-            bash_command='python3 /Users/donor/PycharmProjects/DE_job_market/elt/extract/jobs_crawler/spiders'
+            bash_command='python3 /Users/donor/PycharmProjects/job-market-pkg/src'
+                         '/data_engineering_job_market_package_FelitaD/elt/extract/jobs_crawler/spiders'
                          '/spotify_links.py',
         )
 
         datai_spider = BashOperator(
             task_id='datai_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/DE_job_market/elt/extract/jobs_crawler/spiders/datai.py',
+            bash_command='python3 /Users/donor/PycharmProjects/job-market-pkg/src'
+                         '/data_engineering_job_market_package_FelitaD/elt/extract/jobs_crawler/spiders/datai.py',
             do_xcom_push=False
         )
 
         wttj_spider = BashOperator(
             task_id='wttj_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/DE_job_market/elt/extract/jobs_crawler/spiders/wttj.py',
+            bash_command='python3 /Users/donor/PycharmProjects/job-market-pkg/src'
+                         '/data_engineering_job_market_package_FelitaD/elt/extract/jobs_crawler/spiders/wttj.py',
             do_xcom_push=False
         )
 
         spotify_spider = BashOperator(
             task_id='spotify_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/DE_job_market/elt/extract/jobs_crawler/spiders/wttj.py',
+            bash_command='python3 /Users/donor/PycharmProjects/job-market-pkg/src'
+                         '/data_engineering_job_market_package_FelitaD/elt/extract/jobs_crawler/spiders/wttj.py',
             do_xcom_push=False
         )
 
-    from data_engineering_job_market_package_FelitaD.elt.transform import transform
-    transformer = PythonOperator(
-        task_id='transformer',
-        python_callable=transform,
-    )
-
-    from data_engineering_job_market_package_FelitaD.elt.load.load import run_loader
-    loader = PythonOperator(
-        task_id='loader',
-        python_callable=run_loader,
+    from data_engineering_job_market_package_FelitaD.elt.transform_and_load import transform_and_load
+    transformer_loader = PythonOperator(
+        task_id='transformer_loader',
+        python_callable=transform_and_load,
     )
 
 create_tables >> [spotify_links_spider, wttj_links_spider, datai_spider]
@@ -74,4 +73,4 @@ create_tables >> [spotify_links_spider, wttj_links_spider, datai_spider]
 wttj_links_spider >> wttj_spider
 spotify_links_spider >> spotify_spider
 
-crawler >> transformer >> loader
+crawler >> transformer_loader
