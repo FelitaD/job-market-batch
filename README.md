@@ -1,67 +1,57 @@
-# Data Engineering Job Market
+# Data (engineering) Job Market
 
-## Description
-This project is aimed at building a pipeline while discovering the tools used in data engineering. 
-The data being processed is data engineering jobs openings in Europe scraped from different websites.
+A batch pipeline to analyse job postings.<br>
+The project uses Airflow to orchestrate the batch pipeline consisting of a Scrapy crawler, a Postgres database and Python scripts to perform ETL.
 
-## Architecture
+## Installations
+### Install Airflow
 
-1. Python crawler
-2. PostgreSQL / MongoDB database
+From [Airflow doc](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html) installation instructions :
 
-[Database diagram](https://dbdiagram.io/d/623f46d0bed618387302d39e)
-![](job_market_v2.png)
-
-## Running with Airflow
-
-### Locally
 - Change airflow home in bash/zsh profile
 
-```export AIRFLOW_HOME=/Users/donor/PycharmProjects/job-market-batch/airflow```
+```export AIRFLOW_HOME=[...]/job-market-batch/airflow```
 
 - Install Airflow using the constraints file
 
-```AIRFLOW_VERSION=2.3.3```
+```
+AIRFLOW_VERSION=2.3.3
+PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+```
 
-```PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"```
-
-For example: 3.7
-
-```CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"```
-
-For example: https://raw.githubusercontent.com/apache/airflow/constraints-2.3.3/constraints-3.7.txt
-
-```pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"```
-
-- The Standalone command will initialise the database, make a user, and start all components for you.
+### Run Airflow
+Standalone mode : initialise the Airflow database, make a user, and start all components.
 
 ```airflow standalone```
+Visit `localhost:8080` in the browser and use the admin account details shown on the terminal to login.
 
-- Visit localhost:8080 in the browser and use the admin account details shown on the terminal to login.
+### Create Postgres database
 
-### Docker + project on host
+Will contain the job postings.
+- Install Postgres
+- Create database
+- Add username `JOB_MARKET_DB_USER` and password `JOB_MARKET_DB_PWD` environment variables 
 
+### Install custom packages
 
+> Airflow's best practice to import custom code is through packages.
 
+One package has been created for 2 elements of the pipeline :
+- [data-job-crawler](https://pypi.org/project/data-job-crawler/)
+- [data-job-etl](https://pypi.org/project/data-job-etl/)
 
-## Details
+## Run the project
 
-### 1. Python crawler
-Crawler using scrapy framework. Different spiders scrape data from job websites (DatAI, WTTJ, Linkedin...).
-Scrapy's Item Pipeline stores data into a PostgreSQL database.
+- Airflow UI :<br>
+Connect on localhost:8080 with username `admin` and password in `standalone_admin_password.txt`.<br> 
+In the DAGs tab, toggle on job-market-batch. Trigger the DAG manually if it's not running.
+- Postgres tables :<br> `raw_jobs` contains data before transform<br> `pivotted_jobs` contains the processed data with 1 skill per job and per row for usage in Tableau.
 
-### 2. PostgreSQL database
-The database *job_market* contains at first one table *jobs*.
-The columns are id (serial), url (unique), title (not null), company, location, type, industry and text.
+### Manual tests
 
-### 3. Automation with cron jobs
-Scripts contain execution of spiders. They are then scheduled with crontab.
-
-### 4.a Streamlined ingestion with Pandas
-Read from database to do same basic queries as in psql but with pandas.
-
-### 4.b Synchronization PostgreSQL - Elasticsearch with Logstash
-The data that would be the more interesting to analyse is contained in the job openings' text.
-For this, Elasticserch will allow us to do some analytics and particularly aggregation of the most frequent terms.
-The main goal is to know which technologies are the most in demand for Data Engineer positions in France / Europe.
-
+1. As soon as the DAG finished, we can look at the logs in Airflow UI for tracebacks.
+2. Check modification date of `wttj_links.txt` and `spotify_links.txt`.
+3. Look into Postgres `raw_jobs` and query most recent data.
+4. Compare with `pivotted_jobs` table.
