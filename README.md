@@ -38,9 +38,11 @@ Will contain the job postings.
 
 > Airflow's best practice to import custom code is through packages.
 
-One package has been created for 2 elements of the pipeline :
-- [data-job-crawler](https://pypi.org/project/data-job-crawler/)
-- [data-job-etl](https://pypi.org/project/data-job-etl/)
+Install packages corresponding to 2 phases of the pipeline :
+- Data ingestion : [data-job-crawler](https://pypi.org/project/data-job-crawler/)
+- Data processing : [data-job-etl](https://pypi.org/project/data-job-etl/)
+
+- Execute `playwright install` to enable playwright library used to scrape Javascript web pages.
 
 ## Run the project
 
