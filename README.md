@@ -3,7 +3,7 @@
 A batch pipeline to analyse job postings.<br>
 The project uses Airflow to orchestrate the batch pipeline consisting of a Scrapy crawler, a Postgres database and Python scripts to perform ETL.
 
-- [Installation](##Installations)
+- [Prerequesites](##Prerequesites)
   - [Install Airflow](###Install Airflow)
   - [Run Airflow in standalone (development)](###Run Airflow in standalone (development))
   - [Create Postgres database](###Create Postgres database)
@@ -14,7 +14,7 @@ The project uses Airflow to orchestrate the batch pipeline consisting of a Scrap
   - [DAG import error tests](###DAG import error tests)
 - [Roadmap](##Roadmap)
 
-## Installations
+## Prerequesites
 ### Install Airflow
 
 From [Airflow doc](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html) installation instructions :
@@ -73,12 +73,23 @@ In the DAGs tab, toggle on job-market-batch. Trigger the DAG manually if it's no
 
 ### DAG import error tests
 
+The loading time of DAG is one that has biggest impact on scheduler's performance.
+
 Running this command : `time python3 airflow/dags/job_market_etl_dag.py`
 returns : `python3 airflow/dags/job_market_etl_dag.py  65.12s user 5.28s system 53% cpu 2:11.90 total`
 
 The first measure is the real time, so how long the DAG took to process, here 65.12 seconds, hence generating a DAG import error because it exceeds the 30 s recommended.
 
+> Changing Import Timeout
+> 
+> `export AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=300`<br>
+> `airflow config list|grep -i timeout`
+
+#### Test individual task
+
+`airflow tasks test dag_id task_id date`
 
 ## Roadmap
 
 - [ ] Add unit tests https://airflow.apache.org/docs/apache-airflow/2.3.3/best-practices.html#best-practices-dag-loader-test
+- [ ] Add Airflow DAG documentation
