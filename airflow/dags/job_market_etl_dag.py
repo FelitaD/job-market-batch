@@ -1,10 +1,8 @@
-from datetime import timedelta, datetime
+from datetime import datetime
 from airflow import DAG
 from airflow.utils.task_group import TaskGroup
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
-from airflow.models.connection import Connection
-from airflow.sensors.filesystem import FileSensor
 
 dag_id = 'job-market-batch'
 
@@ -25,29 +23,27 @@ with DAG(dag_id=dag_id,
         python_callable=create_tables
     )
 
-    with TaskGroup('crawler') as crawler:
+    wttj_links_spider = BashOperator(
+        task_id='wttj_links_spider',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/wttj_links.py',
+    )
 
-        wttj_links_spider = BashOperator(
-            task_id='wttj_links_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/wttj_links.py',
-        )
+    wttj_spider = BashOperator(
+        task_id='wttj_spider',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/wttj.py',
+        do_xcom_push=False
+    )
 
-        wttj_spider = BashOperator(
-            task_id='wttj_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/wttj.py',
-            do_xcom_push=False
-        )
+    spotify_links_spider = BashOperator(
+        task_id='spotify_links_spider',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/spotify_links.py',
+    )
 
-        spotify_links_spider = BashOperator(
-            task_id='spotify_links_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/spotify_links.py',
-        )
-
-        spotify_spider = BashOperator(
-            task_id='spotify_spider',
-            bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/spotify.py',
-            do_xcom_push=False
-        )
+    spotify_spider = BashOperator(
+        task_id='spotify_spider',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/spotify.py',
+        do_xcom_push=False
+    )
 
     from data_job_etl.etl import transform_and_load
     etl = PythonOperator(
@@ -55,9 +51,4 @@ with DAG(dag_id=dag_id,
         python_callable=transform_and_load,
     )
 
-create_tables >> [spotify_links_spider, wttj_links_spider]
-
-wttj_links_spider >> wttj_spider
-spotify_links_spider >> spotify_spider
-
-crawler >> etl
+create_tables >> spotify_links_spider >> wttj_links_spider >> wttj_spider >> spotify_spider >> etl
