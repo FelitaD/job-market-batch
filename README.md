@@ -58,7 +58,7 @@ Install packages corresponding to 2 phases of the pipeline :
 ## Run the project
 
 - Airflow UI :<br>
-Connect on localhost:8080 with username `admin` and password in `standalone_admin_password.txt`.<br> 
+Connect on localhost:8080 with username `admin` and password in `standalone_admin_password.txt` ou `findajob`.<br> 
 In the DAGs tab, toggle on job-market-batch. Trigger the DAG manually if it's not running.
 - Postgres tables :<br> `raw_jobs` contains data before transform<br> `pivotted_jobs` contains the processed data with 1 skill per job and per row for usage in Tableau.
 
