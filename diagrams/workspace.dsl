@@ -31,11 +31,19 @@ workspace {
                 transformer = component "Transformer" "TO REFACTOR"
                 loader = component "Loader"
             }
+
+            websites = container "websites" "Websites publishing job postings" {
+
+                wttj = component "Welcome To The Jungle" "welcometothejungle.com"
+                spotify = component "Spotify" "lifeatspotify.com/jobs"
+            }
         }
 
         user -> system "Builds & Uses"
         orchestrator -> crawler "Orchestrates"
         orchestrator -> etl "Orchestrates"
+
+        crawler -> websites "Scrapes from"
         crawler -> database "Writes to"
         etl -> database "Reads from and writes to"
 
@@ -64,6 +72,10 @@ workspace {
             autoLayout
         }
         component etl "EtlView" {
+            include *
+            autoLayout
+        }
+        component websites "WebsitesView" {
             include *
             autoLayout
         }
