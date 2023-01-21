@@ -20,66 +20,22 @@ The project runs locally with Airflow to orchestrate a batch pipeline consisting
 
 Diagrams are text-based and use the C4 model. Since the project evolves diagrams are generated through Structurizr's API -> https://structurizr.com/workspace/79499/diagrams 
 
-## 
+## Run the project locally
 
-- Prerequesites
-  - Install Airflow
-  - Run Airflow in standalone (development)
-  - Create Postgres database
-  - Install custom packages
-- Run the project
-- Tests
-  - Manual tests
-  - DAG import error tests
-- Roadmap
-
-## Prerequesites
-### Install Airflow
-
-From [Airflow doc](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html) installation instructions :
-
-- Change airflow home in bash/zsh profile
-
-```export AIRFLOW_HOME=[...]/job-market-batch/airflow```
-
-- Install Airflow using the constraints file
-
-```
-AIRFLOW_VERSION=2.3.3
-PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
-```
-
-### Run Airflow in standalone (development)
-Standalone mode : initialise the Airflow database, make a user, and start all components.
-
-```airflow standalone```
-Visit `localhost:8080` in the browser and use the admin account details shown on the terminal to login.
-
-### Create Postgres database
-
-Will contain the job postings.
-- Install Postgres
-- Create database
-- Add username `JOB_MARKET_DB_USER` and password `JOB_MARKET_DB_PWD` environment variables 
-
-### Install custom packages
-
-> Airflow's best practice to import custom code is through packages.
-
-Install packages corresponding to 2 phases of the pipeline :
-- Data ingestion : [data-job-crawler](https://pypi.org/project/data-job-crawler/)
-- Data processing : [data-job-etl](https://pypi.org/project/data-job-etl/)
-
+- Install custom packages from pypi
+  - Data ingestion : [data-job-crawler](https://pypi.org/project/data-job-crawler/)
+  - Data processing : [data-job-etl](https://pypi.org/project/data-job-etl/)
 - Execute `playwright install` to enable playwright library used to scrape Javascript web pages.
 
-## Run the project
+- Install Airflow : [installation instructions](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html)
+ 
+- Create Postgres database `job_market` with username `JOB_MARKET_DB_USER` and password `JOB_MARKET_DB_PWD` as environment variables. 
 
-- Airflow UI :<br>
-Connect on localhost:8080 with username `admin` and password in `standalone_admin_password.txt` ou `findajob`.<br> 
-In the DAGs tab, toggle on job-market-batch. Trigger the DAG manually if it's not running.
-- Postgres tables :<br> `raw_jobs` contains data before transform<br> `pivotted_jobs` contains the processed data with 1 skill per job and per row for usage in Tableau.
+- Run ```airflow standalone``` to initialise the Airflow database, make a user, and start all components (development phase).<br>
+- Visit Airflow UI `localhost:8080` in the browser and use the admin account details shown on the terminal to login, or
+  - username `admin` 
+  - password in `standalone_admin_password.txt` ou `findajob`
+  - In the DAGs tab, toggle on job-market-batch. Trigger the DAG manually if it's not running.
 
 ## Tests
 
