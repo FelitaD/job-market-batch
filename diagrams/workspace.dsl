@@ -40,11 +40,13 @@ workspace {
         }
 
         user -> system "Builds & Uses"
+
         orchestrator -> crawler "Orchestrates"
         orchestrator -> etl "Orchestrates"
 
         crawler -> websites "Scrapes from"
         crawler -> database "Writes to"
+
         etl -> database "Reads from and writes to"
 
         WttjLinksSpider -> wttj_links "Writes to"

@@ -44,14 +44,14 @@ The C4 model is used because it is text-based / version control and the project 
 
 ## Tests
 
-### Manual tests
+**Manual tests**
 
 1. As soon as the DAG finished, we can look at the logs in Airflow UI for tracebacks.
 2. Check modification date of `wttj_links.txt` and `spotify_links.txt`.
 3. Look into Postgres `raw_jobs` and query most recent data.
 4. Compare with `pivotted_jobs` table.
 
-### DAG import error tests
+**DAG import error tests**
 
 The loading time of DAG is one that has the biggest impact on scheduler's performance.
 
@@ -65,11 +65,12 @@ The first measure is the real time, so how long the DAG took to process, here 65
 > `export AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=300`<br>
 > `airflow config list|grep -i timeout`
 
-#### Test individual task
+**Test individual task**
 
 `airflow tasks test dag_id task_id date`
 
 ## Roadmap
 
 - [ ] Add unit tests https://airflow.apache.org/docs/apache-airflow/2.3.3/best-practices.html#best-practices-dag-loader-test
-- [ ] Add Airflow DAG documentation
+- [ ] Add data-job-api
+- [ ] Add visualisations
