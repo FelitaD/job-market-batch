@@ -14,11 +14,16 @@ The project runs locally with Airflow to orchestrate a batch pipeline consisting
 - The crawler and the ETL scripts are encapsulated in packages to follow Airflow's best practice[^1](https://airflow.apache.org/docs/apache-airflow/2.2.0/modules_management.html) to add custom code. Their repositories contain more detailed documentation for each process :
   - [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
   - [data-job-etl](https://github.com/FelitaD/data-job-etl)
-- The choice of an ETL process is most appropriate than an ELT due to the relational data, relatively small and requiring complex transformations.
+- The choice of an ETL process is more appropriate than an ELT due to the relational data, relatively small and requiring complex transformations.
 
 **Diagrams**
 
-Diagrams are text-based and use the C4 model. Since the project evolves diagrams are generated through Structurizr's API -> https://structurizr.com/workspace/79499/diagrams 
+Diagrams are generated through [Structurizr's API](https://structurizr.com/workspace/79499/diagrams) with the command
+```bash
+structurizr-cli -id WORKSPACE_ID -key STRUCTURIZR_KEY -secret STRUCTURIZR_SECRET -workspace WORKSPACE_FILE
+```
+`WORKSPACE_ID = 79499`<br>
+The C4 model is used because it is text-based / version control and the project evolves a lot. 
 
 ## Run the project locally
 
@@ -48,7 +53,7 @@ Diagrams are text-based and use the C4 model. Since the project evolves diagrams
 
 ### DAG import error tests
 
-The loading time of DAG is one that has biggest impact on scheduler's performance.
+The loading time of DAG is one that has the biggest impact on scheduler's performance.
 
 Running this command : `time python3 airflow/dags/job_market_etl_dag.py`
 returns : `python3 airflow/dags/job_market_etl_dag.py  65.12s user 5.28s system 53% cpu 2:11.90 total`
