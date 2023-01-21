@@ -1,18 +1,37 @@
-# Data (engineering) Job Market
+# Data Engineering Job Market
 
-A batch pipeline to analyse job postings.<br>
-The project uses Airflow to orchestrate the batch pipeline consisting of a Scrapy crawler, a Postgres database and Python scripts to perform ETL.
+The purpose of this project is to have a better idea of the data engineering job market. 
+The goal is to answer certain questions for my job hunt in order to skill up in the right areas. For example :
+- What technologies are the most used by companies in Europe ?
+- Which companies use big data tools ?
+- What data stack is the most asked for Junior positions ?
 
-- [Prerequesites](##Prerequesites)
-  - [Install Airflow](###Install Airflow)
-  - [Run Airflow in standalone (development)](###Run Airflow in standalone (development))
-  - [Create Postgres database](###Create Postgres database)
-  - [Install custom packages](###Install custom packages)
-- [Run the project](##Run the project)
-- [Tests](##Tests)
-  - [Manual tests](###Manual tests)
-  - [DAG import error tests](###DAG import error tests)
-- [Roadmap](##Roadmap)
+## Architecture
+
+The project runs locally with Airflow to orchestrate a batch pipeline consisting of a crawler, an ETL process and an API to query a Postgres database.
+
+**Remarks** <br>
+- The crawler and the ETL scripts are encapsulated in packages to follow Airflow's best practice[^1](https://airflow.apache.org/docs/apache-airflow/2.2.0/modules_management.html) to add custom code. Their repositories contain more detailed documentation for each process :
+  - [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
+  - [data-job-etl](https://github.com/FelitaD/data-job-etl)
+- The choice of an ETL process is most appropriate than an ELT due to the relational data, relatively small and requiring complex transformations.
+
+**Diagrams**
+
+Diagrams are text-based and use the C4 model. Since the project evolves diagrams are generated through Structurizr's API -> https://structurizr.com/workspace/79499/diagrams 
+
+## 
+
+- Prerequesites
+  - Install Airflow
+  - Run Airflow in standalone (development)
+  - Create Postgres database
+  - Install custom packages
+- Run the project
+- Tests
+  - Manual tests
+  - DAG import error tests
+- Roadmap
 
 ## Prerequesites
 ### Install Airflow
