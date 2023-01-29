@@ -1,6 +1,5 @@
 from datetime import datetime
 from airflow import DAG
-from airflow.utils.task_group import TaskGroup
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 
@@ -45,10 +44,10 @@ with DAG(dag_id=dag_id,
         do_xcom_push=False
     )
 
-    from data_job_etl.etl import transform_and_load
-    etl = PythonOperator(
-        task_id='etl',
+    from data_job_etl.transform_and_load import transform_and_load
+    transform_and_load = PythonOperator(
+        task_id='transform_and_load',
         python_callable=transform_and_load,
     )
 
-create_tables >> spotify_links_spider >> wttj_links_spider >> wttj_spider >> spotify_spider >> etl
+create_tables >> spotify_links_spider >> wttj_links_spider >> wttj_spider >> spotify_spider >> transform_and_load
