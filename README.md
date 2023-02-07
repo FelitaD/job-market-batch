@@ -1,12 +1,17 @@
 # Data Engineering Job Market
 
 The purpose of this project is to have a better idea of the data engineering job market. 
-The goal is to answer certain questions for my job hunt in order to skill up in the right areas. For example :
-- What technologies are the most used by companies in Europe ?
-- Which companies use big data tools ?
-- What data stack is the most asked for Junior positions ?
+The goal is to answer certain questions for my job hunt in order to skill up in the right areas. For example, what technologies are the most used by companies in Europe ? What data stack is the most asked for Junior positions ? Etc.
 
-## Architecture
+Doc :
+- Pipeline Architecture
+- Database Schema
+  - Functional dependencies and decomposition in BCNF
+  - Multivalued dependencies and decomposition in 4NF
+- How to run the project
+- How to test the project
+
+## Pipeline Architecture
 
 The project runs locally with Airflow to orchestrate a batch pipeline consisting of a crawler, an ETL process and an API to query a Postgres database.
 
@@ -25,7 +30,19 @@ structurizr-cli -id WORKSPACE_ID -key STRUCTURIZR_KEY -secret STRUCTURIZR_SECRET
 `WORKSPACE_ID = 79499`<br>
 The C4 model is used because it is text-based / version control and the project evolves a lot. 
 
-## Run the project locally
+## Database schema
+
+The extracted data goes primarily into a schema with a single 'mega' relation : `mega.jobs`.
+
+### Functional dependencies and decomposition in BCNF
+Functional dependencies in `mega.jobs`:
+- job_id -> url, title, company, location, type, remote, created_at, text
+- company -> industry
+
+
+## How to run the project
+
+Everything in development stage (local).
 
 - Install custom packages from pypi
   - Data ingestion : [data-job-crawler](https://pypi.org/project/data-job-crawler/)
@@ -42,7 +59,7 @@ The C4 model is used because it is text-based / version control and the project 
   - password in `standalone_admin_password.txt` ou `findajob`
   - In the DAGs tab, toggle on job-market-batch. Trigger the DAG manually if it's not running.
 
-## Tests
+## How to test the project
 
 **Manual tests**
 
