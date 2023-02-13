@@ -36,7 +36,7 @@ CREATE TABLE "star"."job_techno" (
 
 CREATE INDEX "Date" ON "star"."job" ("created_at");
 
-CREATE UNIQUE INDEX ON "star"."job" ("title", "company_id");
+CREATE UNIQUE INDEX ON "star"."job" ("title", "company_id", "created_at");
 
 ALTER TABLE "star"."job" ADD FOREIGN KEY ("company_id") REFERENCES "star"."company" ("id");
 
