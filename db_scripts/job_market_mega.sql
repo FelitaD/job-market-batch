@@ -12,9 +12,3 @@ CREATE TABLE "mega"."jobs" (
   "created_at" date,
   "text" text
 );
-
-insert into mega.jobs values(1, 'http://www.example.com', 'data engineer junior', 'spotify', null, 'permanent', 'music', 'yes', '2022-02-05', 'Text');
-insert into mega.jobs values(2, 'http://www.example.com/2', 'data engineer', 'spotify', null, 'permanent', 'music', 'yes', '2022-02-05', 'Text');
-insert into mega.jobs values(3, 'http://www.example.com/3', 'data engineer', 'renaissance', null, 'CDI', 'politics', 'partiel', '2022-02-05', 'Text');
-
-select * from mega.jobs;
