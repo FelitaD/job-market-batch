@@ -1,4 +1,4 @@
-CREATE SCHEMA "mega";
+CREATE SCHEMA IF NOT EXISTS "mega";
 
 CREATE TABLE "mega"."jobs" (
   "id" integer PRIMARY KEY,

@@ -5,7 +5,7 @@ The goal is to answer certain questions for my job hunt in order to skill up in 
 
 Doc :
 - Pipeline Architecture
-- Database Schema
+- Database Design
   - Functional dependencies and decomposition in BCNF
   - Multivalued dependencies and decomposition in 4NF
 - How to run the project
@@ -30,7 +30,7 @@ structurizr-cli -id WORKSPACE_ID -key STRUCTURIZR_KEY -secret STRUCTURIZR_SECRET
 `WORKSPACE_ID = 79499`<br>
 The C4 model is used because it is text-based / version control and the project evolves a lot. 
 
-## Database schema
+## Database Design
 
 The extracted data goes primarily into a schema with a single 'mega' relation : `mega.jobs`.
 
@@ -38,7 +38,6 @@ The extracted data goes primarily into a schema with a single 'mega' relation : 
 Functional dependencies in `mega.jobs`:
 - job_id -> url, title, company, location, type, remote, created_at, text
 - company -> industry
-
 
 ## How to run the project
 
