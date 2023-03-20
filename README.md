@@ -21,7 +21,7 @@
 The purpose of this project is to have a better idea of the data engineering job market. 
 The initial goal was to answer certain questions for my job hunt in order to skill up in the right areas. For example, what technologies are the most used by companies in Europe ? What data stack is the most asked for Junior positions ? Etc.
 This repo contains Airflow's DAG which uses custom code through python packages : 
-- Crawler : [data-job-crawler](https://pypi.org/project/data-job-crawler/)
+- Crawler : [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
 - ETL pipeline : [data-job-etl](https://github.com/FelitaD/data-job-etl)  
 - API : [data-job-api]()
 
@@ -30,13 +30,48 @@ This repo contains Airflow's DAG which uses custom code through python packages 
 
 ![img](project_diagrams/data_lifecycle.jpg)
 
+C4 model diagrams : https://structurizr.com/workspace/79499/diagrams
+
 ## Testing
 
-### End-to-end Tests
+Tests below don't measure intermediary steps. For individual pipelines tests see their respective repositories.
+
+### Airflow Tests
+
+- Test the DAG : `python3 job_market_etl_dag.py`
+- Import time : `time python3 job_market_etl_dag.py`. Maximum is 30 seconds.
+- Unit tests for loading the DAG : `pytest test/`
+- Test tasks individually : 
+  - `airflow tasks test job-market-batch create_tables 2022-01-01`
+  - `airflow tasks test job-market-batch spotify_links_spider 2022-01-01`
+  - `airflow tasks test job-market-batch wttj_links_spider 2022-01-01`
+  - `airflow tasks test job-market-batch spotify_spider 2022-01-01`
+  - `airflow tasks test job-market-batch wttj_spider 2022-01-01`
+  - `airflow tasks test job-market-batch transform_and_load 2022-01-01`
+- Backfill (takes account of dependencies) : `airflow dags backfill job-market-batch --start-date 2023-01-01`
+
+### End-to-end Test
+
+Sometimes Airflow's tests will pass but not the DAG run because of the configuration file. For example, the `hostname_callable = socket:getfqdn` will return different hostname values from time to time, explaining the strange behaviour below (solution: set to `socket:gethostname`).
+
+![dag_anomaly](./project_diagrams/dag_anomaly.png)
+
+After at least one successful DAG run (all tasks green and supposedly no errors in the logs), we can take a random website and query the final database with the same url.
+
+Example :
+```
+SELECT title, company, technos, created_at, url FROM pivotted_jobs WHERE url LIKE 'https://www.welcometothejungle.com/fr/companies/foxintelligence/jobs/senior-data-analyst-team-quality_paris%' ORDER BY created_at;
+```
+TODO
+- [ ] All technologies must be present
+- [ ] Eliminate duplicates by changing the url field and removing the last part
 
 ### Data Quality Testing
 
+[data quality testing](https://www.montecarlodata.com/blog-data-quality-testing/)
+
 ### Monitoring
+
 
 ### Unit Testing
 
@@ -80,7 +115,7 @@ Schemas :
 - Processed data is normalized
 - Pivotted data is transformed specially for use in Tableau
 
-![img](project_diagrams/de-job-market_diagram.png)
+![img](./project_diagrams/de-job-market_diagram.png)
 
 ### Orchestration
 
@@ -91,7 +126,7 @@ Airflow coordinates the workflow of the ingestion through the transformation. As
 Everything was run in development stage locally.  
   
 - Install custom packages from pypi  
-  - Data ingestion : [data-job-crawler](https://pypi.org/project/data-job-crawler/)  
+  - Data ingestion : [data-job-crawler](https://github.com/FelitaD/data-job-crawler)  
   - Data processing : [data-job-etl](https://pypi.org/project/data-job-etl/)  
 - Execute `playwright install` to enable playwright library used to scrape Javascript web pages.  
   
@@ -101,5 +136,5 @@ Everything was run in development stage locally.
   
 - Run ```airflow standalone``` to initialise the Airflow database, make a user, and start all components (development phase).<br>  
 - Visit Airflow UI `localhost:8080` in the browser and use the admin account details shown on the terminal to login, or username `admin`   
-- password in `standalone_admin_password.txt` or `findajob`  
+- password in `standalone_admin_password.txt`
   - In the DAGs tab, toggle on job-market-batch. Trigger the DAG manually if it's not running.  

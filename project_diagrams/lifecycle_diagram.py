@@ -12,7 +12,7 @@ with Diagram(name='Data lifecycle', outformat="jpg", show=False):
     with Cluster('Data sources'):
         web = Custom('Web', 'web.png')
 
-    with Cluster(''):
+    with Cluster('Pipelines'):
         with Cluster('Storage'):
             db = Postgresql('SQL database')
             b1 = Blank('')
