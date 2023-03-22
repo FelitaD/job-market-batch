@@ -118,7 +118,7 @@ Schemas:
 - Processed data is normalized
 - Pivotted data is transformed specially for use in Tableau
 
-![img](./project_diagrams/de-job-market_diagram.png)
+![img](project_diagrams/de-job-market_diagram.png)
 
 ### Orchestration
 
