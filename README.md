@@ -53,23 +53,22 @@ Tests below do not measure intermediary steps. For individual pipelines tests se
 
 ### End-to-end Test
 
+After at least one successful DAG run (all tasks green and supposedly no errors in the logs), we can take a random job url from [here](https://www.welcometothejungle.com/fr/jobs?page=1&aroundQuery=&query=data%20engineer&refinementList%5Bcontract_type_names.fr%5D%5B%5D=CDI&refinementList%5Bcontract_type_names.fr%5D%5B%5D=CDD%20%2F%20Temporaire&refinementList%5Bcontract_type_names.fr%5D%5B%5D=Autres&refinementList%5Bcontract_type_names.fr%5D%5B%5D=VIE&refinementList%5Bcontract_type_names.fr%5D%5B%5D=Freelance) and use it to query the final table while replacing everything after `?` with `%`. Example:
+```
+SELECT title, company, technos, created_at, url FROM pivotted_jobs WHERE url LIKE 'https://www.welcometothejungle.com/fr/companies/foxintelligence/jobs/senior-data-analyst-team-quality_paris%' ORDER BY created_at;
+```
+
 Sometimes Airflow's tests will pass but not the DAG run because of the configuration file. For example, the `hostname_callable = socket:getfqdn` will return different hostname values from time to time, explaining the strange behaviour below (solution: set to `socket:gethostname`).
 
 ![dag_anomaly](project_diagrams/dag_anomaly.png)
 
-After at least one successful DAG run (all tasks green and supposedly no errors in the logs), we can take a random job url and use it to query the final table.
-
-Example:
-```
-SELECT title, company, technos, created_at, url FROM pivotted_jobs WHERE url LIKE 'https://www.welcometothejungle.com/fr/companies/foxintelligence/jobs/senior-data-analyst-team-quality_paris%' ORDER BY created_at;
-```
-TODO
-- [ ] All technologies must be present
-- [ ] Eliminate duplicates by changing the url field and removing the last part
-
 ### Data Quality Testing
 
-[data quality testing](https://www.montecarlodata.com/blog-data-quality-testing/)
+- All technologies must be present
+TODO
+- Eliminate duplicates by changing the url field and removing the last part
+
+[More about data quality testing](https://www.montecarlodata.com/blog-data-quality-testing/)
 
 ### Monitoring
 
