@@ -57,7 +57,7 @@ Sometimes Airflow's tests will pass but not the DAG run because of the configura
 
 ![dag_anomaly](project_diagrams/dag_anomaly.png)
 
-After at least one successful DAG run (all tasks green and supposedly no errors in the logs), we can take a random website and query the final database with the same url.
+After at least one successful DAG run (all tasks green and supposedly no errors in the logs), we can take a random job url and use it to query the final table.
 
 Example:
 ```
@@ -90,14 +90,11 @@ Characteristics:
 - HTML will eventually change and requires detection as well as manual update of the XPath
 - Different websites can show more or less fields (eg. remote policy) which will result in null values
 - Schema evolution is not expected
-- If a job offer appears on at least 2 scraped websites, how will the duplicate be detected
+- If a job offer appears on at least 2 scraped websites, need to deal with duplicate
 
 ### Ingestion
 
-The ingestion is made with the Scrapy framework that pulls the web data. It adds a pipeline feature which formats the data into predefined fields and writes into a database in a batch process.
-
-All the ingestion work is encapsulated in one of the two python packages (best practices with Airflow) [data-job-crawler](https://github.com/FelitaD/data-job-crawler).
-
+The ingestion is made with Scrapy framework which adds a pipeline feature that conform the data into predefined fields and writes them to the database.
 
 ### Transformation
 
@@ -117,19 +114,17 @@ Once transformed, the data is loaded in a new table without normalization. A fut
 
 ### Orchestration
 
-Following the best practices with Airflow then all the ingestion work is encapsulated in a python package [data-job-crawler](https://github.com/FelitaD/data-job-crawler).
+Airflow is run locally. Following best practices, the custom code is encapsulated in python packages then imported in the DAG.
 
 ## How to run
-
-Everything was run locally in development stage.  
 
 ### Prerequesites
 
 - Setup environment 
   - Activate venv and install requirements
-  - Execute `playwright install`
+  - Execute `playwright install` to download chromium
 - Install Airflow with pypi: [official instructions](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html)
-- Create Postgres database `job_market` and pass username `JOB_MARKET_DB_USER` and password `JOB_MARKET_DB_PWD` as environment variables   
+- Create `job_market` database and export environment variables `JOB_MARKET_DB_USER` and `JOB_MARKET_DB_PWD`   
 
 ### Run
 
