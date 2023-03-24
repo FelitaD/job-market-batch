@@ -4,7 +4,8 @@ After finishing a bootcamp in 2022, I was feeling restricted by a conception of 
 Months later, thanks to O'Reilly's book _Fundamentals of Data Engineering_, I had more clarity with the role. 
 But the variety of technical skills is still a major consideration when applying to jobs. 
 
-In this project, I am trying to keep up with technologies present on the data engineering job market using Matt Turck's Data Landscape.
+This project is trying to achieve 2 things. First it's a tool to look up jobs gathered from various sources. 
+The secondary goal is to keep up with technologies present on the data engineering job market using Matt Turck's Data Landscape.
 
 ![landscape](project_diagrams/2020-Data-and-AI-Landscape-Matt-Turck-at-FirstMark-v1.png)
 [2020 Data and AI Landscape - Matt Turck at FirstMark](https://mattturck.com/data2020/)
@@ -94,7 +95,7 @@ Characteristics:
 - Javascript based pages require additional scraping library Playwright
 - HTML will eventually change and requires detection as well as manual update of the XPath
 - Different websites can show more or less fields (eg. remote policy) which will result in null values
-- Schema evolution is not expected
+- Schema evolution can occur
 - If a job offer appears on at least 2 scraped websites, need to deal with duplicate
 
 ### Ingestion
@@ -104,7 +105,7 @@ The ingestion is made with Scrapy framework which adds a pipeline feature that c
 ### Transformation
 
 All transformations are made with Python in a specific ETL pipeline [data-job-etl](https://github.com/FelitaD/data-job-etl).
-The processing consist of cleaning and reformatting certain fields and extracting the technology names from the text field into a new column. The data is finally modelled to be loaded in a new database.
+The processing consists of cleaning and reformatting fields and extracting the technology names from the text field into a new column. The data is finally modelled to be loaded in a new database.
 
 ### Storage
 
