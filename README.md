@@ -9,6 +9,9 @@ In this project, I am trying to keep up with technologies present on the data en
 ![landscape](project_diagrams/2020-Data-and-AI-Landscape-Matt-Turck-at-FirstMark-v1.png)
 [2020 Data and AI Landscape - Matt Turck at FirstMark](https://mattturck.com/data2020/)
 
+****
+#### Contents
+
 - [Architecture](#architecture)
 - [Testing](#testing)
   - [End-to-end tests](#end-to-end-tests)
@@ -23,6 +26,8 @@ In this project, I am trying to keep up with technologies present on the data en
   - [Storage](#storage)
   - [Orchestration](#orchestration)
 - [How to run](#how-to-run)
+
+****
 
 ## Architecture
 
@@ -132,3 +137,6 @@ Airflow is run locally. Following best practices, the custom code is encapsulate
 - ```airflow standalone``` will initialise Airflow database, make a user, and start all components (development phase).<br>  
 - Airflow UI is at `localhost:8080` with username `admin` and password in `standalone_admin_password.txt`
 - In DAGs tab, toggle on job-market-batch and trigger manually if not running.  
+
+
+[Back to contents](#contents)
