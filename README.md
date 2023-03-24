@@ -73,7 +73,6 @@ Sometimes Airflow's tests will pass but not the DAG run because of the configura
 ### Data Quality Testing
 
 - All technologies must be present
-TODO
 - Eliminate duplicates by changing the url field and removing the last part
 - [Checklist](https://www.montecarlodata.com/blog-data-quality-testing/)
 
