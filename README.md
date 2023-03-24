@@ -1,11 +1,11 @@
 # Data Engineering Job Market
 
 After finishing a bootcamp in 2022, I was feeling restricted by a conception of data engineering that was technology-centered. 
-Months later, thanks to O'Reilly's book _Fundamentals of Data Engineering_, I had more clarity with the role. 
+Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I had more clarity with the role. 
 But the variety of technical skills is still a major consideration when applying to jobs. 
 
 This project is trying to achieve 2 things. First it's a tool to look up jobs gathered from various sources. 
-The secondary goal is gain insights about technologies present on the data engineering job market 
+The secondary goal is to gain insight into technologies present on the data engineering job market 
 using Matt Turck's Data Landscape 
 which I break down on my [website](https://publish.obsidian.md/felita-d/Matt+Turck+Data+Landscape).
 
