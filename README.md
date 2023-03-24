@@ -5,7 +5,7 @@ Months later, thanks to O'Reilly's book _Fundamentals of Data Engineering_, I ha
 But the variety of technical skills is still a major consideration when applying to jobs. 
 
 This project is trying to achieve 2 things. First it's a tool to look up jobs gathered from various sources. 
-The secondary goal is to keep up with technologies present on the data engineering job market using Matt Turck's Data Landscape.
+The secondary goal is gain insights about technologies present on the data engineering job market using Matt Turck's Data Landscape.
 
 ![landscape](project_diagrams/2020-Data-and-AI-Landscape-Matt-Turck-at-FirstMark-v1.png)
 [2020 Data and AI Landscape - Matt Turck at FirstMark](https://mattturck.com/data2020/)
