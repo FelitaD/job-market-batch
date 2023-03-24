@@ -1,6 +1,14 @@
 # Data Engineering Job Market
 
-- [Project Overview](#project-overview)
+After finishing a bootcamp in 2022, I was feeling restricted by a conception of data engineering that was technology-centered. 
+Months later, thanks to O'Reilly's book _Fundamentals of Data Engineering_ and others, I had more clarity about data engineering. 
+But the variety of technical skills is still a major consideration when applying to jobs. 
+
+In this project, I am trying to keep up with technologies present on the data engineering job market using Matt Turck's Data Landscape.
+
+![landscape](project_diagrams/2020-Data-and-AI-Landscape-Matt-Turck-at-FirstMark-v1.png)
+[2020 Data and AI Landscape - Matt Turck at FirstMark](https://mattturck.com/data2020/)
+
 - [Architecture](#architecture)
 - [Testing](#testing)
   - [End-to-end tests](#end-to-end-tests)
@@ -16,18 +24,13 @@
   - [Orchestration](#orchestration)
 - [How to run](#how-to-run)
 
-## Project Overview
+## Architecture
 
-The project's purpose is to obtain a better insight into the data engineering job market. 
-The initial goal was to answer certain questions for my job hunt in order to skill up in the right areas. What technologies are the most used by companies in Europe? What data stack is the most asked for Junior positions? Etc.
-
-This repo contains Airflow's DAG which uses custom code through python packages: 
+A minimal pipeline using Python scripts, Postgres, Airflow and Tableau. 
+Links to Python scripts :
 - Crawler: [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
 - ETL pipeline: [data-job-etl](https://github.com/FelitaD/data-job-etl)  
 - API: [data-job-api](https://github.com/FelitaD/data-job-api)
-
-
-## Architecture
 
 ![img](project_diagrams/data_lifecycle.jpg)
 
@@ -67,8 +70,7 @@ Sometimes Airflow's tests will pass but not the DAG run because of the configura
 - All technologies must be present
 TODO
 - Eliminate duplicates by changing the url field and removing the last part
-
-[More about data quality testing](https://www.montecarlodata.com/blog-data-quality-testing/)
+- [Checklist](https://www.montecarlodata.com/blog-data-quality-testing/)
 
 ### Monitoring
 
