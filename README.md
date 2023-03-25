@@ -9,8 +9,8 @@ The secondary goal is to gain insight into technologies present on the data engi
 using Matt Turck's Data Landscape 
 which I break down on my [website](http://bit.ly/3lC4AIz).
 
-![landscape](project_diagrams/2020-Data-and-AI-Landscape-Matt-Turck-at-FirstMark-v1.png)
-[2020 Data and AI Landscape - Matt Turck at FirstMark](https://mattturck.com/data2020/)
+![landscape](project_diagrams/mad2023.png)
+[The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
 
 ****
 #### Contents
