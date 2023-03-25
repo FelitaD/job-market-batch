@@ -7,9 +7,9 @@ But the variety of technical skills is still a major consideration when applying
 This project is trying to achieve 2 things. First it's a tool to look up jobs gathered from various sources. 
 The secondary goal is to gain insight into technologies present on the data engineering job market 
 using Matt Turck's Data Landscape 
-which I break down on my [website](http://bit.ly/3lC4AIz).
+which I also want to elaborate on my [website](http://bit.ly/3lC4AIz).
 
-![landscape](project_diagrams/mad2023.png)
+![landscape](mad/mad2023.png)
 [The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
 
 ****
