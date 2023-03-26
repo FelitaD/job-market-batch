@@ -1,2 +1,3 @@
 /elt/transform/data/*
 /airflow/logs/
+/.swm/
