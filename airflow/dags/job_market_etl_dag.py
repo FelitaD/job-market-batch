@@ -44,6 +44,11 @@ with DAG(dag_id=dag_id,
         do_xcom_push=False
     )
 
+    upload_to_s3 = BashOperator(
+        task_id='upload_to_s3',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/upload_to_s3.py'
+    )
+
     from data_job_etl.transform_and_load import transform_and_load
     transform_and_load = PythonOperator(
         task_id='transform_and_load',
@@ -51,3 +56,4 @@ with DAG(dag_id=dag_id,
     )
 
 create_tables >> spotify_links_spider >> wttj_links_spider >> wttj_spider >> spotify_spider >> transform_and_load
+[spotify_links_spider, wttj_links_spider] >> upload_to_s3
