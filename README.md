@@ -1,8 +1,7 @@
 # Data Engineering Job Market
 
-After finishing a bootcamp in 2022, I was feeling restricted by a conception of data engineering that was technology-centered. 
-Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I had more clarity with the role. 
-But the variety of technical skills is still a major consideration when applying to jobs. 
+After finishing a bootcamp in 2022, I had a conception of data engineering mostly technology-centered. 
+Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I had more clarity with the role, but the variety of technical skills is still a major consideration when applying to jobs. 
 
 This project is trying to achieve 2 things. First it's a tool to look up jobs gathered from various sources. 
 The secondary goal is to gain insight into technologies present on the data engineering job market 
@@ -40,7 +39,7 @@ Links to Python scripts :
 - ETL pipeline: [data-job-etl](https://github.com/FelitaD/data-job-etl)  
 - API: [data-job-api](https://github.com/FelitaD/data-job-api)
 
-![img](project_diagrams/data_lifecycle.jpg)
+![img](diagram/data_lifecycle.jpg)
 
 C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 
@@ -71,7 +70,7 @@ SELECT title, company, technos, created_at, url FROM pivotted_jobs WHERE url LIK
 
 Sometimes Airflow's tests will pass but not the DAG run because of the configuration file. For example, the `hostname_callable = socket:getfqdn` will return different hostname values from time to time, explaining the strange behaviour below (solution: set to `socket:gethostname`).
 
-![dag_anomaly](project_diagrams/dag_anomaly.png)
+![dag_anomaly](diagram/dag_anomaly.png)
 
 ### Data Quality Testing
 
@@ -118,7 +117,7 @@ PostgreSQL is used as OLTP and OLAP stores. The data is uniformely structured wi
 The raw data is stored in a mega relation. The field `text` is the biggest but should not reach the 1 GB capacity limitation. 
 Once transformed, the data is loaded in a new table without normalization. A future implementation would differentiate 2 databases with the schemas:
 
-![img](project_diagrams/job_market_mega.png) ![img](project_diagrams/job_market_star.png)
+![img](diagram/job_market_mega.png) ![img](diagram/job_market_star.png)
 
 ### Orchestration
 

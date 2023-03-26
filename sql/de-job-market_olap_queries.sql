@@ -1,5 +1,8 @@
 /*** Verify new records in database ***/
-select * from information_schema.tables;
+
+select created_at, id, title, company, url from raw_jobs order by created_at desc limit 10;
+
+select created_at, id, title, company, url from pivotted_jobs order by created_at desc limit 10;
 
 select created_at, count(*) as jobs_scraped from raw_jobs group by created_at order by created_at desc;
 select created_at, count(*) as jobs_processed from pivotted_jobs group by created_at order by created_at desc;
