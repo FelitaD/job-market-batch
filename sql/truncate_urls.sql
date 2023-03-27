@@ -36,9 +36,5 @@ AND a.url = b.url;
 -- unique title, company, location, type, industry, remote, created_at = 4587
 -- unique title, company, location, type, industry, remote = 4405
 
-select id, count(distinct(title, company, location, type, industry, remote, created_at))
-from raw_jobs group by (title, company, location, type, industry, remote, created_at)
-having count(distinct(title, company, location, type, industry, remote, created_at)) > 1;
-
 -- Add primary key
 ALTER TABLE raw_jobs ADD PRIMARY KEY (url);

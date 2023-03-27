@@ -55,5 +55,4 @@ with DAG(dag_id=dag_id,
         python_callable=transform_and_load,
     )
 
-create_tables >> spotify_links_spider >> wttj_links_spider >> wttj_spider >> spotify_spider >> transform_and_load
-[spotify_links_spider, wttj_links_spider] >> upload_to_s3
+create_tables >> [spotify_links_spider, wttj_links_spider] >> upload_to_s3 >> [wttj_spider, spotify_spider] >> transform_and_load

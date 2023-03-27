@@ -52,13 +52,7 @@ Tests below do not measure intermediary steps. For individual pipelines tests se
 - Test the DAG: `python3 job_market_etl_dag.py`
 - Import time: `time python3 job_market_etl_dag.py`. Maximum is 30 seconds.
 - Unit tests for loading the DAG: `pytest test/`
-- Test tasks individually: 
-  - `airflow tasks test job-market-batch create_tables 2022-01-01`
-  - `airflow tasks test job-market-batch spotify_links_spider 2022-01-01`
-  - `airflow tasks test job-market-batch wttj_links_spider 2022-01-01`
-  - `airflow tasks test job-market-batch spotify_spider 2022-01-01`
-  - `airflow tasks test job-market-batch wttj_spider 2022-01-01`
-  - `airflow tasks test job-market-batch transform_and_load 2022-01-01`
+- Test tasks individually: `airflow tasks test job-market-batch upload_to_s3 2022-01-01`
 - Backfill (takes account of dependencies): `airflow dags backfill job-market-batch --start-date 2023-01-01`
 
 ### End-to-end Test
