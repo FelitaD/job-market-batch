@@ -1,12 +1,9 @@
 # Data Engineering Job Market
 
-After finishing a bootcamp in 2022, I had a conception of data engineering mostly technology-centered. 
-Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I had more clarity with the role, but the variety of technical skills is still a major consideration when applying to jobs. 
+After finishing a bootcamp in 2022, I had a conception of data engineering very technology-centered. 
+Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I have more clarity with the role, but the variety of technical skills is still a major consideration when applying to jobs. 
 
-This project is trying to achieve 2 things. First it's a tool to look up jobs gathered from various sources. 
-The secondary goal is to gain insight into technologies present on the data engineering job market 
-using Matt Turck's Data Landscape 
-which I also want to elaborate on my [website](http://bit.ly/3lC4AIz).
+The project will try to help getting a bigger picture on the technology landscape, as well as matching my profile with the fittest company. 
 
 ![landscape](mad/mad2023.png)
 [The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
@@ -52,14 +49,16 @@ Tests below do not measure intermediary steps. For individual pipelines tests se
 - Test the DAG: `python3 job_market_etl_dag.py`
 - Import time: `time python3 job_market_etl_dag.py`. Maximum is 30 seconds.
 - Unit tests for loading the DAG: `pytest test/`
-- Test tasks individually: `airflow tasks test job-market-batch upload_to_s3 2022-01-01`
+- List tasks: `airflow tasks list job-market-batch`
+- Test tasks individually: `airflow tasks test job-market-batch TASK 2022-01-01`
 - Backfill (takes account of dependencies): `airflow dags backfill job-market-batch --start-date 2023-01-01`
 
 ### End-to-end Test
 
-After at least one successful DAG run (all tasks green and supposedly no errors in the logs), we can take a random job url from [here](https://www.welcometothejungle.com/fr/jobs?page=1&aroundQuery=&query=data%20engineer&refinementList%5Bcontract_type_names.fr%5D%5B%5D=CDI&refinementList%5Bcontract_type_names.fr%5D%5B%5D=CDD%20%2F%20Temporaire&refinementList%5Bcontract_type_names.fr%5D%5B%5D=Autres&refinementList%5Bcontract_type_names.fr%5D%5B%5D=VIE&refinementList%5Bcontract_type_names.fr%5D%5B%5D=Freelance) and use it to query the final table while replacing everything after `?` with `%`. Example:
+- Execute `airflow standalone` and run DAG
+
 ```
-SELECT title, company, technos, created_at, url FROM pivotted_jobs WHERE url LIKE 'https://www.welcometothejungle.com/fr/companies/foxintelligence/jobs/senior-data-analyst-team-quality_paris%' ORDER BY created_at;
+SELECT title, company, technos, created_at, url FROM pivotted_jobs WHERE url LIKE 'https://www.welcometothejungle.com/fr/companies/foxintelligence/jobs/senior-data-analyst-team-quality_paris' ORDER BY created_at;
 ```
 
 Sometimes Airflow's tests will pass but not the DAG run because of the configuration file. For example, the `hostname_callable = socket:getfqdn` will return different hostname values from time to time, explaining the strange behaviour below (solution: set to `socket:gethostname`).
@@ -78,7 +77,9 @@ To be completed.
 
 ### Unit Testing
 
-To be completed.
+Use Pytest
+- Crawler coverage
+- ETL coverage
 
 ## Data Lifecycle
 

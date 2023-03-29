@@ -24,7 +24,8 @@ with DAG(dag_id=dag_id,
 
     wttj_links_spider = BashOperator(
         task_id='wttj_links_spider',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/wttj_links.py',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders'
+                     '/wttj_links.py',
     )
 
     wttj_spider = BashOperator(
@@ -49,10 +50,10 @@ with DAG(dag_id=dag_id,
         bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/upload_to_s3.py'
     )
 
-    from data_job_etl.transform_and_load import transform_and_load
-    transform_and_load = PythonOperator(
-        task_id='transform_and_load',
-        python_callable=transform_and_load,
+    from data_job_etl.etl import main
+    etl = PythonOperator(
+        task_id='etl',
+        python_callable=main,
     )
 
-create_tables >> [spotify_links_spider, wttj_links_spider] >> upload_to_s3 >> [wttj_spider, spotify_spider] >> transform_and_load
+[spotify_links_spider, wttj_links_spider] >> upload_to_s3 >> [wttj_spider, spotify_spider] >> create_tables >> etl
