@@ -3,7 +3,7 @@
 After finishing a bootcamp in 2022, I had a conception of data engineering very technology-centered. 
 Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I have more clarity with the role, but the variety of technical skills is still a major consideration when applying to jobs. 
 
-The project will try to help getting a bigger picture on the technology landscape, as well as matching my profile with the fittest company. 
+The project will try to help getting a bigger picture of the technology landscape, as well as matching my profile with the fittest company. 
 
 ![landscape](mad/mad2023.png)
 [The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
@@ -31,7 +31,7 @@ The project will try to help getting a bigger picture on the technology landscap
 ## Architecture
 
 A minimal pipeline using Python scripts, Postgres, Airflow and Tableau. 
-Links to Python scripts :
+Links to Python packages:
 - Crawler: [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
 - ETL pipeline: [data-job-etl](https://github.com/FelitaD/data-job-etl)  
 - API: [data-job-api](https://github.com/FelitaD/data-job-api)
@@ -55,20 +55,23 @@ Tests below do not measure intermediary steps. For individual pipelines tests se
 
 ### End-to-end Test
 
-- Execute `airflow standalone` and run DAG
-
-```
-SELECT title, company, technos, created_at, url FROM pivotted_jobs WHERE url LIKE 'https://www.welcometothejungle.com/fr/companies/foxintelligence/jobs/senior-data-analyst-team-quality_paris' ORDER BY created_at;
-```
-
-Sometimes Airflow's tests will pass but not the DAG run because of the configuration file. For example, the `hostname_callable = socket:getfqdn` will return different hostname values from time to time, explaining the strange behaviour below (solution: set to `socket:gethostname`).
-
-![dag_anomaly](diagram/dag_anomaly.png)
+- Look at latest job posting
+- Query `processed_jobs` table and compare results
 
 ### Data Quality Testing
 
-- All technologies must be present
-- Eliminate duplicates by changing the url field and removing the last part
+- All technologies must be present 
+  - Some technologies are written differently (eg. Google BigQuery, Google Big Query)
+  - Have to be added manually in `config/definitions.py` from the ETL package
+- Eliminate non data engineer jobs
+  - Some non data engineer jobs are scraped despite the filters
+  - Spotted with: `select title, url from processed_jobs where title !~* '.*data.*engineer.*';`
+- Eliminate duplicate jobs 
+  - Some jobs are reposted multiple times and have a different url each time
+  - Removed by removing the last part of the url, see: `sql/truncate_urls.sql`
+- Processing errors
+  - To be added in the unit tests input
+  - Process title errors: `select R.title, P.title from raw_jobs as R join processed_jobs as P on R.id = P.id where R.title != P.title;`
 - [Checklist](https://www.montecarlodata.com/blog-data-quality-testing/)
 
 ### Monitoring
