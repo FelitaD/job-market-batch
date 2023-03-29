@@ -42,16 +42,23 @@ C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 
 ## Testing
 
-Tests below do not measure intermediary steps. For individual pipelines tests see their respective repositories.
+For individual pipelines tests see their respective repositories.
 
 ### Airflow Tests
 
-- Test the DAG: `python3 job_market_etl_dag.py`
-- Import time: `time python3 job_market_etl_dag.py`. Maximum is 30 seconds.
-- Unit tests for loading the DAG: `pytest test/`
-- List tasks: `airflow tasks list job-market-batch`
-- Test tasks individually: `airflow tasks test job-market-batch TASK 2022-01-01`
-- Backfill (takes account of dependencies): `airflow dags backfill job-market-batch --start-date 2023-01-01`
+- DAG file
+  - `python3 job_market_etl_dag.py`
+- Import time 
+  - `time python3 job_market_etl_dag.py` 
+  - Maximum is 30 seconds
+- DAG loading 
+  - `pytest tests/`
+- List tasks and test them individually 
+  - `airflow tasks list job-market-batch`
+  - `airflow tasks test job-market-batch TASK 2022-01-01`
+- Backfill
+  - `airflow dags backfill job-market-batch --start-date 2023-01-01`
+  - Takes account of dependencies 
 
 ### End-to-end Test
 
@@ -80,7 +87,7 @@ To be completed.
 
 ### Unit Testing
 
-Use Pytest
+Pytest
 - Crawler coverage
 - ETL coverage
 
