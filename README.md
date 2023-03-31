@@ -65,21 +65,26 @@ For individual pipelines tests see their respective repositories.
 - Look at latest job posting
 - Query `processed_jobs` table and compare results
 
+- Example output :
+![img.png](docs/output_junior_view.png)
+
 ### Data Quality Testing
 
 - All technologies must be present 
   - Some technologies are written differently (eg. Google BigQuery, Google Big Query)
   - Have to be added manually in `config/definitions.py` from the ETL package
 - Eliminate non data engineer jobs
-  - Some non data engineer jobs are scraped despite the filters
-  - Spotted with: `select title, url from processed_jobs where title !~* '.*data.*engineer.*';`
+  - About half the jobs despite the filters
+  - Verify data engineer roles with `regex_data_engineer_roles.sql`
 - Eliminate duplicate jobs 
   - Some jobs are reposted multiple times and have a different url each time
   - Removed by removing the last part of the url, see: `sql/truncate_urls.sql`
 - Processing errors
   - To be added in the unit tests input
-  - Process title errors: `select R.title, P.title from raw_jobs as R join processed_jobs as P on R.id = P.id where R.title != P.title;`
-- [Checklist](https://www.montecarlodata.com/blog-data-quality-testing/)
+  - Some queries to spot error in `tests/processing_errors.sql` 
+- Missing values
+  - Only id, url, title and company have the `NOT NULL` constraint
+  - Check other fields in `tests/missing_values.sql`
 
 ### Monitoring
 

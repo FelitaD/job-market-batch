@@ -34,17 +34,6 @@ with DAG(dag_id=dag_id,
         do_xcom_push=False
     )
 
-    spotify_links_spider = BashOperator(
-        task_id='spotify_links_spider',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/spotify_links.py',
-    )
-
-    spotify_spider = BashOperator(
-        task_id='spotify_spider',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/spotify.py',
-        do_xcom_push=False
-    )
-
     upload_to_s3 = BashOperator(
         task_id='upload_to_s3',
         bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/upload_to_s3.py'
@@ -56,4 +45,4 @@ with DAG(dag_id=dag_id,
         python_callable=main,
     )
 
-[spotify_links_spider, wttj_links_spider] >> upload_to_s3 >> [wttj_spider, spotify_spider] >> create_tables >> etl
+wttj_links_spider >> upload_to_s3 >> wttj_spider >> create_tables >> etl
