@@ -5,7 +5,7 @@ Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I have mo
 
 The project will try to help getting a bigger picture of the technology landscape, as well as matching my profile with the fittest company. 
 
-![landscape](mad/mad2023.png)
+![landscape](docs/mad2023.png)
 [The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
 
 ****
@@ -36,7 +36,7 @@ Links to Python packages:
 - ETL pipeline: [data-job-etl](https://github.com/FelitaD/data-job-etl)  
 - API: [data-job-api](https://github.com/FelitaD/data-job-api)
 
-![img](diagram/data_lifecycle.jpg)
+![img](docs/data_lifecycle.jpg)
 
 C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 
@@ -65,7 +65,8 @@ For individual pipelines tests see their respective repositories.
 - Look at latest job posting
 - Query `processed_jobs` table and compare results
 
-- Example output :
+Example output :
+
 ![img.png](docs/output_junior_view.png)
 
 ### Data Quality Testing
@@ -127,7 +128,7 @@ PostgreSQL is used as OLTP and OLAP stores. The data is uniformely structured wi
 The raw data is stored in a mega relation. The field `text` is the biggest but should not reach the 1 GB capacity limitation. 
 Once transformed, the data is loaded in a new table without normalization. A future implementation would differentiate 2 databases with the schemas:
 
-![img](diagram/job_market_mega.png) ![img](diagram/job_market_star.png)
+[//]: # (![img]&#40;docs/job_market_mega.png&#41; ![docs]&#40;docs/job_market_star.png&#41;)
 
 ### Orchestration
 
