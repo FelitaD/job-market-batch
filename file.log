@@ -368,3 +368,4 @@ TypeError: extract_table() missing 1 required positional argument: 'table'
 2023-03-31 16:23:42,801 - data_job_etl.config.etl_logger - ERROR - This is an error
 2023-03-31 16:24:29,929 - data_job_etl.config.etl_logger - ERROR - This is an error
 2023-03-31 16:25:18,258 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-04-01 20:05:58,862 - data_job_etl.config.etl_logger - ERROR - This is an error
