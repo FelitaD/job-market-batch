@@ -64,10 +64,11 @@ CREATE VIEW de_strict AS (
     ORDER BY created_at DESC
 );
 
--- gpt sql query
+-- Relevant DE : all except Senior
 
-SELECT id, text
-FROM processed_jobs
-WHERE title ~* '.*(data|analytics|devops|cloud).*(engineer|ingénieur).*|.*(engineer|ingénieur).*(data|données|big data|bigdata)|.*etl.*'
-AND summary is null
-ORDER BY created_at DESC;
+CREATE VIEW relevant AS (
+    select id, url, title, company, stack, remote, location, industry, type, created_at, summary
+    from processed_jobs AS p
+    where p.id in (select job_id from apply)
+);
+

@@ -18,6 +18,3 @@ CREATE TRIGGER insert_apply
     FOR EACH ROW
     EXECUTE FUNCTION create_apply();
 
-
-
-
