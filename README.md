@@ -69,6 +69,9 @@ Example output :
 
 ![img.png](docs/output_junior_view.png)
 
+As seen in the 2nd record above, the job offer isn't for a data engineer. 
+Data quality is the goal of the next section.
+
 ### Data Quality Testing
 
 - All technologies must be present 
@@ -128,7 +131,7 @@ PostgreSQL is used as OLTP and OLAP stores. The data is uniformely structured wi
 The raw data is stored in a mega relation. The field `text` is the biggest but should not reach the 1 GB capacity limitation. 
 Once transformed, the data is loaded in a new table without normalization. A future implementation would differentiate 2 databases with the schemas:
 
-[//]: # (![img]&#40;docs/job_market_mega.png&#41; ![docs]&#40;docs/job_market_star.png&#41;)
+![schema](docs/db_schema.png))
 
 ### Orchestration
 

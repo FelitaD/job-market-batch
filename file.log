@@ -302,3 +302,69 @@
 2023-03-30 15:19:38,518 - data_job_etl.config.etl_logger - ERROR - This is an error
 2023-03-30 15:19:55,538 - data_job_etl.config.etl_logger - ERROR - This is an error
 2023-03-30 15:20:12,136 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:48:31,445 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:48:47,627 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:48:49,981 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:49:45,584 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:50:42,915 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:50:57,015 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:51:01,654 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:51:23,602 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:51:59,073 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:52:36,193 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:53:10,942 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:53:46,408 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:54:23,322 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:54:57,974 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:55:30,848 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:56:07,589 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:56:42,842 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:57:21,141 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:57:56,139 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:58:31,091 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:59:08,138 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 15:59:42,835 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:00:17,767 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:00:52,650 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:01:27,954 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:02:08,749 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:02:48,790 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:03:24,802 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:03:44,471 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:03:47,246 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:03:48,745 - data_job_etl.config.etl_logger - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "/Users/donor/PycharmProjects/data-job-etl/data_job_etl/etl.py", line 35, in main
+    raw_jobs = extract()
+  File "/Users/donor/PycharmProjects/data-job-etl/data_job_etl/etl.py", line 12, in extract
+    raw_jobs = extractor.extract_table()
+TypeError: extract_table() missing 1 required positional argument: 'table'
+2023-03-31 16:04:00,588 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:04:47,493 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:05:33,898 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:06:20,602 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:07:07,135 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:07:53,859 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:08:40,133 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:09:21,160 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:09:55,944 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:10:42,402 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:11:26,390 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:12:13,285 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:13:00,662 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:13:46,984 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:14:33,976 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:15:19,301 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:16:07,080 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:16:54,887 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:17:41,418 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:18:28,812 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:19:14,370 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:20:01,167 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:20:47,434 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:21:21,224 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:22:07,540 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:22:54,291 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:23:42,801 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:24:29,929 - data_job_etl.config.etl_logger - ERROR - This is an error
+2023-03-31 16:25:18,258 - data_job_etl.config.etl_logger - ERROR - This is an error

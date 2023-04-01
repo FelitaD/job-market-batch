@@ -41,7 +41,6 @@ CREATE VIEW de AS (
     SELECT created_at, id, title, company, stack, remote, location, industry, type, url, summary
     FROM processed_jobs
     WHERE title ~* '.*(data|analytics|devops|cloud).*(engineer|ingénieur).*|.*(engineer|ingénieur).*(data|données|big data|bigdata)|.*etl.*'
-    AND title ~* '.*junior.*'
     ORDER BY created_at DESC
 );
 
