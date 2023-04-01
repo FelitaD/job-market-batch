@@ -45,4 +45,10 @@ with DAG(dag_id=dag_id,
         python_callable=main,
     )
 
-wttj_links_spider >> upload_to_s3 >> wttj_spider >> create_tables >> etl
+    from data_job_etl.transform.summarise import summarise
+    summarise = PythonOperator(
+        task_id='summarise',
+        python_callable=summarise
+    )
+
+wttj_links_spider >> upload_to_s3 >> wttj_spider >> create_tables >> etl >> summarise

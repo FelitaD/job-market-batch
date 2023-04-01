@@ -131,6 +131,8 @@ PostgreSQL is used as OLTP and OLAP stores. The data is uniformely structured wi
 The raw data is stored in a mega relation. The field `text` is the biggest but should not reach the 1 GB capacity limitation. 
 Once transformed, the data is loaded in a new table without normalization. A future implementation would differentiate 2 databases with the schemas:
 
+[Db diagram](https://dbdiagram.io/d/63dfb687296d97641d7e8b0f)
+
 ![schema](docs/db_schema.png))
 
 ### Orchestration
