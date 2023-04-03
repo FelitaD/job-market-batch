@@ -69,6 +69,9 @@ CREATE VIEW de_strict AS (
 CREATE VIEW relevant AS (
     select id, url, title, company, stack, remote, location, industry, type, created_at, summary
     from processed_jobs AS p
-    where p.id in (select job_id from apply)
+    where p.id in
+        (select job_id from apply)
+    order by created_at desc
 );
+
 

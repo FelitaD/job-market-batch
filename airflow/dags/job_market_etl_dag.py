@@ -36,7 +36,7 @@ with DAG(dag_id=dag_id,
 
     upload_to_s3 = BashOperator(
         task_id='upload_to_s3',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/upload_to_s3.py'
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/helpers/upload_to_s3.py'
     )
 
     from data_job_etl.etl import main
@@ -45,10 +45,10 @@ with DAG(dag_id=dag_id,
         python_callable=main,
     )
 
-    from data_job_etl.transform.summarise import summarise
+    from data_job_etl.transform.summarise import main
     summarise = PythonOperator(
         task_id='summarise',
-        python_callable=summarise
+        python_callable=main
     )
 
 wttj_links_spider >> upload_to_s3 >> wttj_spider >> create_tables >> etl >> summarise
