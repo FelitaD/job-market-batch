@@ -17,4 +17,3 @@ CREATE TRIGGER insert_apply
     AFTER INSERT ON processed_jobs
     FOR EACH ROW
     EXECUTE FUNCTION create_apply();
-
