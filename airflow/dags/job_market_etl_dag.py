@@ -34,9 +34,9 @@ with DAG(dag_id=dag_id,
         do_xcom_push=False
     )
 
-    upload_to_s3 = BashOperator(
+    upload_new_links = BashOperator(
         task_id='upload_to_s3',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/helpers/upload_to_s3.py'
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/helpers/s3_helper.py'
     )
 
     from data_job_etl.etl import main
@@ -51,4 +51,4 @@ with DAG(dag_id=dag_id,
         python_callable=main
     )
 
-wttj_links_spider >> upload_to_s3 >> wttj_spider >> create_tables >> etl >> summarise
+wttj_links_spider >> upload_new_links >> wttj_spider >> create_tables >> etl >> summarise

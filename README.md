@@ -9,9 +9,13 @@ The project will try to help getting a bigger picture of the technology landscap
 [The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
 
 ****
-#### Contents
+#### Documentation
 
 - [Architecture](#architecture)
+- [Pipelines](#pipelines)
+  - [Ingestion pull pipeline](#ingestion-pull-pipeline)
+  - [ETL pipeline](#etl-pipeline)
+  - [API pipeline](#api-pipeline)
 - [Testing](#testing)
   - [End-to-end tests](#end-to-end-tests)
   - [Data quality testing](#data-quality-testing)
@@ -30,15 +34,35 @@ The project will try to help getting a bigger picture of the technology landscap
 
 ## Architecture
 
-A minimal pipeline using Python scripts, Postgres, Airflow and Tableau. 
-Links to Python packages:
-- Crawler: [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
-- ETL pipeline: [data-job-etl](https://github.com/FelitaD/data-job-etl)  
-- API: [data-job-api](https://github.com/FelitaD/data-job-api)
+A minimal pipeline using Python scripts, Postgres, Airflow and Tableau.
 
 ![img](docs/data_lifecycle.jpg)
 
 C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
+
+## Pipelines
+
+### Ingestion pull pipeline
+
+[data-job-crawler](https://github.com/FelitaD/data-job-crawler) 
+
+![img](docs/ingestion_data_flow.jpg)
+
+A first spider designed to parse Javascript pages gathers links to job postings. 
+They are stored in S3 then fed to a 2nd spider. 
+The final scraped items go through a pipeline writing into Postgres.
+Can be scaled with more websites.
+
+### ETL pipeline
+
+[data-job-etl](https://github.com/FelitaD/data-job-etl)
+
+![img](docs/etl_pipeline.jpg)
+
+### API pipeline
+
+[data-job-api](https://github.com/FelitaD/data-job-api)
+
 
 ## Testing
 
@@ -156,4 +180,4 @@ Airflow is run locally. Following best practices, the custom code is encapsulate
 - In DAGs tab, toggle on job-market-batch and trigger manually if not running.  
 
 
-[Back to contents](#contents)
+[Back to top](#data-engineering-job-market)
