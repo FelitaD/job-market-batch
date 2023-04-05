@@ -35,7 +35,7 @@ with DAG(dag_id=dag_id,
     )
 
     upload_new_links = BashOperator(
-        task_id='upload_to_s3',
+        task_id='upload_new_links',
         bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/helpers/s3_helper.py'
     )
 

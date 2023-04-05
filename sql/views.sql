@@ -36,6 +36,17 @@ CREATE VIEW new_processed AS (
     ORDER BY created_at DESC
 );
 
+CREATE VIEW new_apply AS (
+    SELECT created_at, id, title, company, url, stack, summary
+    FROM processed_jobs AS p
+    JOIN apply AS a
+    ON p.id = a.job_id
+    WHERE created_at = (
+        SELECT created_at
+        FROM processed_jobs
+        ORDER BY created_at DESC limit 1)
+);
+
 -- Data Engineer
 CREATE VIEW de AS (
     SELECT created_at, id, title, company, stack, remote, location, industry, type, url, summary
