@@ -65,17 +65,7 @@ CREATE VIEW junior AS (
     ORDER BY created_at DESC
 );
 
--- Data Engineer (Not Senior/Junior) positions
-
-CREATE VIEW de_strict AS (
-    SELECT created_at, id, title, company, stack, remote, location, industry, type, url, summary
-    FROM processed_jobs
-    WHERE title ~* '.*(data|analytics|devops|cloud).*(engineer|ingénieur).*|.*(engineer|ingénieur).*(data|données|big data|bigdata)|.*etl.*'
-    AND title !~* '.*junior.*|.*senior.*'
-    ORDER BY created_at DESC
-);
-
--- Relevant DE : all except Senior
+-- Relevant DE : all except Senior and intern
 
 CREATE VIEW relevant AS (
     select id, url, title, company, stack, remote, location, industry, type, created_at, summary

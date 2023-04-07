@@ -32,13 +32,11 @@ CREATE TABLE "pivotted_jobs" (
 CREATE TABLE apply AS
     SELECT p.id AS job_id
     FROM processed_jobs AS p
-        WHERE p.title ~* '.*(data|analytics|devops|cloud).*(engineer|ingénieur).*|.*(engineer|ingénieur).*(data|données|big data|bigdata)|.*etl.*'
-        AND p.title !~* '.*(senior|head of|intern).*';
+        WHERE p.title ~* '.*(data|analytics).*(engineer|ingénieur).*|.*(engineer|ingénieur).*(data|données|big data|bigdata)|.*etl.*'
+        AND p.title !~* '.*(senior|head of|lead|intern|stage|cloud|devops).*';
 
 ALTER TABLE "apply" ADD FOREIGN KEY ("job_id") REFERENCES "processed_jobs" ("id");
 
-ALTER TABLE apply
-ADD COLUMN relevant boolean;
 
 ALTER TABLE apply
 ADD COLUMN applied_date date;
