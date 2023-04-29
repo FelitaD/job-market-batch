@@ -42,4 +42,7 @@ ALTER TABLE apply
 ADD COLUMN applied_date date;
 
 
-
+UPDATE processed_jobs AS p1
+SET size = r.size, education = r.education, experience = r.experience
+FROM raw_jobs AS r
+INNER JOIN processed_jobs AS p2 ON p2.id = r.id;
