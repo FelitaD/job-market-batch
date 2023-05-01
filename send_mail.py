@@ -1,6 +1,8 @@
 from __future__ import print_function
 
 import os.path
+import base64
+from email.mime.text import MIMEText
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -9,12 +11,12 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # If modifying these scopes, delete the file token.json.
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
 
-def main():
-    """Shows basic usage of the Gmail API.
-    Lists the user's Gmail labels.
+def main(message_content):
+    """Send a message from authentified Gmail user.
+    Contains last scraped jobs.
     """
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -37,15 +39,17 @@ def main():
     try:
         # Call the Gmail API
         service = build('gmail', 'v1', credentials=creds)
-        results = service.users().labels().list(userId='me').execute()
-        labels = results.get('labels', [])
+        message = MIMEText(message_content)
+        message['to'] = 'donorfelita@msn.com'
+        message['subject'] = 'Email Subject'
+        create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
 
-        if not labels:
-            print('No labels found.')
-            return
-        print('Labels:')
-        for label in labels:
-            print(label['name'])
+        try:
+            message = (service.users().messages().send(userId="me", body=create_message).execute())
+            print(F'sent message to {message} Message Id: {message["id"]}')
+        except HttpError as error:
+            print(F'An error occurred: {error}')
+            message = None
 
     except HttpError as error:
         # TODO(developer) - Handle errors from gmail API.
@@ -53,4 +57,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    message_content = 'Test'
+    main(message_content)
