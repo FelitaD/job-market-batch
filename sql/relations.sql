@@ -29,11 +29,13 @@ CREATE TABLE "pivotted_jobs" (
   "created_at" date NOT NULL
 );
 
+DROP TABLE apply CASCADE;
+
 CREATE TABLE apply AS
     SELECT p.id AS job_id
     FROM processed_jobs AS p
-        WHERE p.title ~* '.*(data|analytics).*(engineer|ingénieur).*|.*(engineer|ingénieur).*(data|données|big data|bigdata)|.*etl.*'
-        AND p.title !~* '.*(senior|head of|lead|intern|stage|cloud|devops).*';
+        WHERE p.title ~* '.*(data|analytics|devops|cloud).*(engineer|ingénieur|ingenieur).*|.*(engineer|ingénieur).*(data|données|donnees|big data|bigdata)|.*etl.*'
+        AND p.title !~* '.*(senior|head of|intern|internship|stage|alternance|alternant|apprentice|apprenti).*';
 
 ALTER TABLE "apply" ADD FOREIGN KEY ("job_id") REFERENCES "processed_jobs" ("id");
 
@@ -46,3 +48,24 @@ UPDATE processed_jobs AS p1
 SET size = r.size, education = r.education, experience = r.experience
 FROM raw_jobs AS r
 INNER JOIN processed_jobs AS p2 ON p2.id = r.id;
+
+
+--- Ranking table
+
+DROP TABLE IF EXISTS ranked_jobs;
+
+CREATE TABLE ranked_jobs AS
+    SELECT a.job_id AS job_id
+    FROM apply AS a;
+
+ALTER TABLE ranked_jobs
+ADD PRIMARY KEY (job_id);
+
+ALTER TABLE ranked_jobs
+ADD COLUMN rank float;
+
+ALTER TABLE ranked_jobs
+ADD COLUMN remote_num float;
+
+ALTER TABLE ranked_jobs
+ADD COLUMN exp_num float;

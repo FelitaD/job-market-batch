@@ -18,7 +18,11 @@ numpy~=1.23.3
 pytest
 openai
 matplotlib
+google
 google-auth
 google-auth-oauthlib
 google-auth-httplib2
 google-api-python-client
+google-cloud
+google-cloud-vision
+google-api-core

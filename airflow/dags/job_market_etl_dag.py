@@ -45,10 +45,21 @@ with DAG(dag_id=dag_id,
         python_callable=main,
     )
 
-    from data_job_etl.transform.summarise import main
+    from data_job_etl.summarise import main
     summarise = PythonOperator(
         task_id='summarise',
         python_callable=main
     )
 
-wttj_links_spider >> upload_new_links >> wttj_spider >> create_tables >> etl >> summarise
+    rank = BashOperator(
+        task_id='rank',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-etl/data_job_etl/rank.py'
+    )
+
+    message = BashOperator(
+        task_id='message',
+        bash_command='python3 /Users/donor/PycharmProjects/data-job-etl/data_job_etl/message.py'
+    )
+
+
+wttj_links_spider >> upload_new_links >> wttj_spider >> create_tables >> etl >> summarise >> rank >> message

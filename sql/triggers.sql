@@ -5,8 +5,8 @@ AS $$
 BEGIN
     INSERT INTO apply(job_id)
         SELECT NEW.id
-        WHERE NEW.title ~* '.*(data|analytics|devops|cloud).*(engineer|ingénieur).*|.*(engineer|ingénieur).*(data|données|big data|bigdata)|.*etl.*'
-        AND NEW.title !~* '.*(senior|head of|intern).*';
+        WHERE NEW.title ~* '.*(data|analytics|devops|cloud).*(engineer|ingénieur|ingenieur).*|.*(engineer|ingénieur).*(data|données|donnees|big data|bigdata)|.*etl.*'
+        AND NEW.title !~* '.*(senior|head of|intern|internship|stage|alternance|alternant|apprentice|apprenti).*';
     RETURN NULL;
 END;
 $$ LANGUAGE PLPGSQL;

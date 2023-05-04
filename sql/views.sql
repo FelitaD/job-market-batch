@@ -56,7 +56,6 @@ CREATE VIEW de AS (
 );
 
 -- Junior Data Engineer positions
-
 CREATE VIEW junior AS (
     SELECT created_at, id, title, company, stack, remote, location, industry, type, url, summary
     FROM processed_jobs
@@ -65,14 +64,13 @@ CREATE VIEW junior AS (
     ORDER BY created_at DESC
 );
 
--- Relevant DE : all except Senior and intern
-
+-- Relevant : join apply and processed_jobs
 CREATE VIEW relevant AS (
-    select id, url, title, company, stack, remote, location, industry, type, created_at, summary
-    from processed_jobs AS p
-    where p.id in
-        (select job_id from apply)
-    order by created_at desc
+    SELECT *
+    FROM processed_jobs AS p
+    JOIN ranked_jobs AS r
+    ON p.id = r.job_id
+    WHERE p.id in
+        (SELECT job_id FROM apply)
+    ORDER BY created_at DESC
 );
-
-
