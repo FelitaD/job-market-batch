@@ -7,8 +7,8 @@ This project is gathers new data engineer jobs and enriches them to serve either
 1. Showcase skills for a data engineering interview
 2. Optimize job search
 
-**Job Matching Data Flow** 
-![Mind map](/Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/docs/Mind Map.jpg)
+**Data Flow** 
+![Mind map](https://github.com/FelitaD/job-market-batch/blob/main/docs/Mind%20Map.jpg)
 [Data Flow Miro board](https://miro.com/welcomeonboard/NUtFWUhHSTRoNU1uZG5IZVFBbFl1cUh1VXN4bGUxMmJkR3ZwNVNPa05nMHZRT1c3WWZ1a1JSR2hUd2lzdm1oanwzMDc0NDU3MzYxNTA0MTQ0MjcwfDI=?share_link_id=594368920393)
 
 **Background**
