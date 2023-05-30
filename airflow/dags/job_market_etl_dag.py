@@ -24,19 +24,19 @@ with DAG(dag_id=dag_id,
 
     wttj_links_spider = BashOperator(
         task_id='wttj_links_spider',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders'
+        bash_command='python3 /Users/donor/Library/Mobile\ Documents/com~apple~CloudDocs/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders'
                      '/wttj_links.py',
     )
 
     wttj_spider = BashOperator(
         task_id='wttj_spider',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/wttj.py',
+        bash_command='python3 /Users/donor/Library/Mobile\ Documents/com~apple~CloudDocs/PycharmProjects/data-job-crawler/data_job_crawler/crawler/spiders/wttj.py',
         do_xcom_push=False
     )
 
     upload_new_links = BashOperator(
         task_id='upload_new_links',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-crawler/data_job_crawler/helpers/s3_helper.py'
+        bash_command='python3 /Users/donor/Library/Mobile\ Documents/com~apple~CloudDocs/PycharmProjects/data-job-crawler/data_job_crawler/helpers/s3_helper.py'
     )
 
     from data_job_etl.etl import main
@@ -45,21 +45,15 @@ with DAG(dag_id=dag_id,
         python_callable=main,
     )
 
-    from data_job_etl.summarise import main
-    summarise = PythonOperator(
-        task_id='summarise',
-        python_callable=main
-    )
-
     rank = BashOperator(
         task_id='rank',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-etl/data_job_etl/rank.py'
+        bash_command='python3 /Users/donor/Library/Mobile\ Documents/com~apple~CloudDocs/PycharmProjects/data-job-etl/data_job_etl/rank.py'
     )
 
     message = BashOperator(
         task_id='message',
-        bash_command='python3 /Users/donor/PycharmProjects/data-job-etl/data_job_etl/message.py'
+        bash_command='python3 /Users/donor/Library/Mobile\ Documents/com~apple~CloudDocs/PycharmProjects/data-job-etl/data_job_etl/message.py'
     )
 
 
-wttj_links_spider >> upload_new_links >> wttj_spider >> create_tables >> etl >> summarise >> rank >> message
+wttj_links_spider >> upload_new_links >> wttj_spider >> create_tables >> etl >> rank >> message

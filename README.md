@@ -1,9 +1,21 @@
 # Data Engineering Job Market
 
+This project is taking new jobs in data engineering and enriches them to serve either an analytics dashboard or a recommendation system.
+
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVMNceW10=/?moveToViewport=-406,-404,5982,2736&embedId=933032901276" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+
+**Objectives**
+
+1. Showcase skills for a data engineering interview
+2. Optimize job search
+
+**Background**
+
 After finishing a bootcamp in 2022, I had a conception of data engineering very technology-centered. 
 Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I have more clarity with the role, but the variety of technical skills is still a major consideration when applying to jobs. 
 
 The project will try to help getting a bigger picture of the technology landscape, as well as matching my profile with the fittest company. 
+
 
 ![landscape](docs/mad2023.png)
 [The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)

@@ -1,3 +1,4 @@
+--- processed_jobs
 
 CREATE TABLE "processed_jobs" (
   "id" integer PRIMARY KEY,
@@ -15,6 +16,13 @@ CREATE TABLE "processed_jobs" (
 
 ALTER TABLE "processed_jobs" ADD FOREIGN KEY ("id") REFERENCES "raw_jobs" ("id");
 
+UPDATE processed_jobs AS p1
+SET size = r.size, education = r.education, experience = r.experience
+FROM raw_jobs AS r
+INNER JOIN processed_jobs AS p2 ON p2.id = r.id;
+
+--- pivotted_jobs
+
 CREATE TABLE "pivotted_jobs" (
   "id" SERIAL PRIMARY KEY,
   "raw_id" integer,
@@ -29,7 +37,9 @@ CREATE TABLE "pivotted_jobs" (
   "created_at" date NOT NULL
 );
 
-DROP TABLE apply CASCADE;
+--- apply
+
+DROP TABLE IF EXISTS apply CASCADE;
 
 CREATE TABLE apply AS
     SELECT p.id AS job_id
@@ -39,33 +49,11 @@ CREATE TABLE apply AS
 
 ALTER TABLE "apply" ADD FOREIGN KEY ("job_id") REFERENCES "processed_jobs" ("id");
 
+ALTER TABLE apply
+ADD COLUMN open bool;
 
 ALTER TABLE apply
-ADD COLUMN applied_date date;
+DROP COLUMN open bool;
 
 
-UPDATE processed_jobs AS p1
-SET size = r.size, education = r.education, experience = r.experience
-FROM raw_jobs AS r
-INNER JOIN processed_jobs AS p2 ON p2.id = r.id;
 
-
---- Ranking table
-
-DROP TABLE IF EXISTS ranked_jobs;
-
-CREATE TABLE ranked_jobs AS
-    SELECT a.job_id AS job_id
-    FROM apply AS a;
-
-ALTER TABLE ranked_jobs
-ADD PRIMARY KEY (job_id);
-
-ALTER TABLE ranked_jobs
-ADD COLUMN rank float;
-
-ALTER TABLE ranked_jobs
-ADD COLUMN remote_num float;
-
-ALTER TABLE ranked_jobs
-ADD COLUMN exp_num float;

@@ -68,9 +68,8 @@ CREATE VIEW junior AS (
 CREATE VIEW relevant AS (
     SELECT *
     FROM processed_jobs AS p
-    JOIN ranked_jobs AS r
-    ON p.id = r.job_id
-    WHERE p.id in
-        (SELECT job_id FROM apply)
+    JOIN apply AS a
+    ON p.id = a.job_id
+    AND p.type IN ('Permanent', 'VIE', 'CDI', 'Autres', 'Full Time')
     ORDER BY created_at DESC
 );
