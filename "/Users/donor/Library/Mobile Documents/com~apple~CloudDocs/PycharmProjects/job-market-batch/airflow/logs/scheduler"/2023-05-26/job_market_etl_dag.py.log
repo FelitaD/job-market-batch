@@ -1,0 +1,18 @@
+[2023-05-26 14:14:00,954] {processor.py:153} INFO - Started process (PID=59898) to work on /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py
+[2023-05-26 14:14:00,954] {processor.py:641} INFO - Processing file /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py for tasks to queue
+[2023-05-26 14:14:00,954] {logging_mixin.py:115} INFO - [2023-05-26 14:14:00,954] {dagbag.py:508} INFO - Filling up the DagBag from /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py
+[2023-05-26 14:14:01,896] {processor.py:651} INFO - DAG(s) dict_keys(['job-market-batch']) retrieved from /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py
+[2023-05-26 14:14:03,486] {logging_mixin.py:115} INFO - [2023-05-26 14:14:03,486] {manager.py:508} INFO - Created Permission View: can read on DAG:job-market-batch
+[2023-05-26 14:14:03,495] {logging_mixin.py:115} INFO - [2023-05-26 14:14:03,494] {manager.py:508} INFO - Created Permission View: can delete on DAG:job-market-batch
+[2023-05-26 14:14:03,504] {logging_mixin.py:115} INFO - [2023-05-26 14:14:03,504] {manager.py:508} INFO - Created Permission View: can edit on DAG:job-market-batch
+[2023-05-26 14:14:03,504] {logging_mixin.py:115} INFO - [2023-05-26 14:14:03,504] {dag.py:2420} INFO - Sync 1 DAGs
+[2023-05-26 14:14:03,516] {logging_mixin.py:115} INFO - [2023-05-26 14:14:03,516] {dag.py:2439} INFO - Creating ORM DAG for job-market-batch
+[2023-05-26 14:14:03,531] {logging_mixin.py:115} INFO - [2023-05-26 14:14:03,531] {dag.py:2968} INFO - Setting next_dagrun for job-market-batch to 2023-05-25T00:00:00+00:00, run_after=2023-05-26T00:00:00+00:00
+[2023-05-26 14:14:03,543] {processor.py:161} INFO - Processing /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py took 2.590 seconds
+[2023-05-26 14:15:01,068] {processor.py:153} INFO - Started process (PID=60024) to work on /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py
+[2023-05-26 14:15:01,068] {processor.py:641} INFO - Processing file /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py for tasks to queue
+[2023-05-26 14:15:01,069] {logging_mixin.py:115} INFO - [2023-05-26 14:15:01,069] {dagbag.py:508} INFO - Filling up the DagBag from /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py
+[2023-05-26 14:15:02,075] {processor.py:651} INFO - DAG(s) dict_keys(['job-market-batch']) retrieved from /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py
+[2023-05-26 14:15:02,184] {logging_mixin.py:115} INFO - [2023-05-26 14:15:02,183] {dag.py:2420} INFO - Sync 1 DAGs
+[2023-05-26 14:15:02,209] {logging_mixin.py:115} INFO - [2023-05-26 14:15:02,209] {dag.py:2968} INFO - Setting next_dagrun for job-market-batch to 2023-05-25T00:00:00+00:00, run_after=2023-05-26T00:00:00+00:00
+[2023-05-26 14:15:02,278] {processor.py:161} INFO - Processing /Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/airflow/dags/job_market_etl_dag.py took 1.212 seconds

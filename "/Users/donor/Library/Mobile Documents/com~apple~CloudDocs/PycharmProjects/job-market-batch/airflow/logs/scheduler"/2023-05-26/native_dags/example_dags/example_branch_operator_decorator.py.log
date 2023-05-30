@@ -1,0 +1,11 @@
+[2023-05-26 14:14:51,052] {processor.py:153} INFO - Started process (PID=60005) to work on /usr/local/lib/python3.9/site-packages/airflow/example_dags/example_branch_operator_decorator.py
+[2023-05-26 14:14:51,052] {processor.py:641} INFO - Processing file /usr/local/lib/python3.9/site-packages/airflow/example_dags/example_branch_operator_decorator.py for tasks to queue
+[2023-05-26 14:14:51,053] {logging_mixin.py:115} INFO - [2023-05-26 14:14:51,053] {dagbag.py:508} INFO - Filling up the DagBag from /usr/local/lib/python3.9/site-packages/airflow/example_dags/example_branch_operator_decorator.py
+[2023-05-26 14:14:51,104] {processor.py:651} INFO - DAG(s) dict_keys(['example_branch_python_operator_decorator']) retrieved from /usr/local/lib/python3.9/site-packages/airflow/example_dags/example_branch_operator_decorator.py
+[2023-05-26 14:14:52,718] {logging_mixin.py:115} INFO - [2023-05-26 14:14:52,718] {manager.py:508} INFO - Created Permission View: can delete on DAG:example_branch_python_operator_decorator
+[2023-05-26 14:14:52,730] {logging_mixin.py:115} INFO - [2023-05-26 14:14:52,730] {manager.py:508} INFO - Created Permission View: can read on DAG:example_branch_python_operator_decorator
+[2023-05-26 14:14:52,738] {logging_mixin.py:115} INFO - [2023-05-26 14:14:52,738] {manager.py:508} INFO - Created Permission View: can edit on DAG:example_branch_python_operator_decorator
+[2023-05-26 14:14:52,738] {logging_mixin.py:115} INFO - [2023-05-26 14:14:52,738] {dag.py:2420} INFO - Sync 1 DAGs
+[2023-05-26 14:14:52,749] {logging_mixin.py:115} INFO - [2023-05-26 14:14:52,748] {dag.py:2439} INFO - Creating ORM DAG for example_branch_python_operator_decorator
+[2023-05-26 14:14:52,765] {logging_mixin.py:115} INFO - [2023-05-26 14:14:52,765] {dag.py:2968} INFO - Setting next_dagrun for example_branch_python_operator_decorator to 2023-05-25T00:00:00+00:00, run_after=2023-05-26T00:00:00+00:00
+[2023-05-26 14:14:52,798] {processor.py:161} INFO - Processing /usr/local/lib/python3.9/site-packages/airflow/example_dags/example_branch_operator_decorator.py took 1.747 seconds

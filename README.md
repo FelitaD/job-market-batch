@@ -1,13 +1,15 @@
 # Data Engineering Job Market
 
-This project is taking new jobs in data engineering and enriches them to serve either an analytics dashboard or a recommendation system.
-
-<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVMNceW10=/?moveToViewport=-406,-404,5982,2736&embedId=933032901276" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+This project is gathers new data engineer jobs and enriches them to serve either an analytics dashboard or a recommendation system.
 
 **Objectives**
 
 1. Showcase skills for a data engineering interview
 2. Optimize job search
+
+**Job Matching Data Flow** 
+![Mind map](/Users/donor/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/job-market-batch/docs/Mind Map.jpg)
+[Data Flow Miro board](https://miro.com/welcomeonboard/NUtFWUhHSTRoNU1uZG5IZVFBbFl1cUh1VXN4bGUxMmJkR3ZwNVNPa05nMHZRT1c3WWZ1a1JSR2hUd2lzdm1oanwzMDc0NDU3MzYxNTA0MTQ0MjcwfDI=?share_link_id=594368920393)
 
 **Background**
 
@@ -16,8 +18,6 @@ Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I have mo
 
 The project will try to help getting a bigger picture of the technology landscape, as well as matching my profile with the fittest company. 
 
-
-![landscape](docs/mad2023.png)
 [The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
 
 ****
