@@ -115,16 +115,15 @@ However, these errors are easily detectable.
 
 ## Pipelines
 
+This project comprises pipelines that can run individually. 
+They are written in python packages to follow Airflow's best practice for importing custom code.
+
 ### Ingestion pull pipeline
 
-[data-job-crawler](https://github.com/FelitaD/data-job-crawler) 
+This first pipeline takes raw data, web pages, into a Postgres table. It bypasses the dynamic content by using 2 successive spiders. 
 
+Repo: [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
 ![img](docs/ingestion_data_flow.jpg)
-
-A first spider designed to parse Javascript pages gathers links to job postings. 
-They are stored in S3 then fed to a 2nd spider. 
-The final scraped items go through a pipeline writing into Postgres.
-Can be scaled with more websites.
 
 ### ETL pipeline
 
