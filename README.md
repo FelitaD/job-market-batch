@@ -127,7 +127,7 @@ Repo: [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
 
 ### ETL pipeline
 
-This is the processing pipeline, using just Python and SQLAlchemy to connect with PostgreSQL.
+This is the processing pipeline, using Python and SQLAlchemy to connect with PostgreSQL.
 
 Repo: [data-job-etl](https://github.com/FelitaD/data-job-etl)
 ![img](docs/etl_pipeline.jpg)
@@ -174,7 +174,7 @@ Once transformed, the data is loaded in a new table without normalization. A fut
 
 ### Orchestration
 
-Airflow is run locally. Following best practices, the custom code is encapsulated in python packages then imported in the DAG.
+Airflow is run locally with LocalExecutor. Following best practices, the custom code is encapsulated in python packages then imported in the DAG.
 
 
 [Back to top](#data-engineering-job-market)
