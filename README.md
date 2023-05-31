@@ -65,19 +65,16 @@ For individual pipelines tests see their respective repositories.
 
 ### Airflow Tests
 
+Multiple errors can arise using Airflow. 
+The recommended order for testing is the DAG file then individual tasks and backfill taking account of dependencies.
 - DAG file
-  - `python3 job_market_etl_dag.py`
-- Import time 
-  - `time python3 job_market_etl_dag.py` 
-  - Maximum is 30 seconds
-- DAG loading 
-  - `pytest tests/`
-- List tasks and test them individually 
+`python3 job_market_etl_dag.py`
+- Import time `time python3 job_market_etl_dag.py` (default max 30 seconds) 
+- DAG loading `pytest tests/`
+- List tasks and test them individually
   - `airflow tasks list job-market-batch`
   - `airflow tasks test job-market-batch TASK 2022-01-01`
-- Backfill
-  - `airflow dags backfill job-market-batch --start-date 2023-01-01`
-  - Takes account of dependencies 
+- Backfill `airflow dags backfill job-market-batch --start-date 2023-01-01`
 
 ### End-to-end Test
 
