@@ -127,14 +127,15 @@ Repo: [data-job-crawler](https://github.com/FelitaD/data-job-crawler)
 
 ### ETL pipeline
 
-[data-job-etl](https://github.com/FelitaD/data-job-etl)
+This is the processing pipeline, using just Python and SQLAlchemy to connect with PostgreSQL.
 
+Repo: [data-job-etl](https://github.com/FelitaD/data-job-etl)
 ![img](docs/etl_pipeline.jpg)
 
 ### API pipeline
 
+The Flask RESTful API implements a recommendation algorithm that can be used through a web UI.
 [data-job-api](https://github.com/FelitaD/data-job-api)
-
 
 ## Data Lifecycle
 
