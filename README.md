@@ -12,19 +12,18 @@ Below is the final Data Flow of the project.
 [Data Flow Miro board](https://miro.com/welcomeonboard/NUtFWUhHSTRoNU1uZG5IZVFBbFl1cUh1VXN4bGUxMmJkR3ZwNVNPa05nMHZRT1c3WWZ1a1JSR2hUd2lzdm1oanwzMDc0NDU3MzYxNTA0MTQ0MjcwfDI=?share_link_id=594368920393)
 ![Mind map](https://github.com/FelitaD/job-market-batch/blob/main/docs/Mind%20Map.jpg)
 
-****
-#### Documentation
+**Summary**
 
 - [Architecture](#architecture)
+- [Running the project](#running-the-project)
+- [Testing the project](#testing-the-project)
+  - [End-to-end tests](#end-to-end-tests)
+  - [Data quality testing](#data-quality-testing)
+  - [Unit testing](#unit-testing)
 - [Pipelines](#pipelines)
   - [Ingestion pull pipeline](#ingestion-pull-pipeline)
   - [ETL pipeline](#etl-pipeline)
   - [API pipeline](#api-pipeline)
-- [Testing](#testing)
-  - [End-to-end tests](#end-to-end-tests)
-  - [Data quality testing](#data-quality-testing)
-  - [Monitoring](#monitoring)
-  - [Unit testing](#unit-testing)
 - [Data Lifecycle](#data-lifecycle)
   - [Source System](#source-system)
   - [Ingestion](#ingestion)
@@ -32,43 +31,35 @@ Below is the final Data Flow of the project.
   - [Serving](#serving)
   - [Storage](#storage)
   - [Orchestration](#orchestration)
-- [How to run](#how-to-run)
+
 
 ****
 
 ## Architecture
 
-A minimal pipeline using Python scripts, Postgres, Airflow and Tableau.
+A minimal pipeline using Python, Postgres, Airflow and Tableau.
 
 ![img](docs/data_lifecycle.jpg)
 
 C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 
-## Pipelines
+## Running the project
 
-### Ingestion pull pipeline
+**Prerequesites**
 
-[data-job-crawler](https://github.com/FelitaD/data-job-crawler) 
+- Setup environment 
+  - Activate venv and install requirements
+  - Execute `playwright install` to download chromium
+- Install Airflow with pypi: [official instructions](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html)
+- Create `job_market` database and export environment variables `JOB_MARKET_DB_USER` and `JOB_MARKET_DB_PWD`   
 
-![img](docs/ingestion_data_flow.jpg)
+**Run locally**
 
-A first spider designed to parse Javascript pages gathers links to job postings. 
-They are stored in S3 then fed to a 2nd spider. 
-The final scraped items go through a pipeline writing into Postgres.
-Can be scaled with more websites.
+- ```airflow standalone``` will initialise Airflow database, make a user, and start all components (development phase).<br>  
+- Airflow UI is at `localhost:8080` with username `admin` and password in `standalone_admin_password.txt`
+- In DAGs tab, toggle on job-market-batch and trigger manually if not running.  
 
-### ETL pipeline
-
-[data-job-etl](https://github.com/FelitaD/data-job-etl)
-
-![img](docs/etl_pipeline.jpg)
-
-### API pipeline
-
-[data-job-api](https://github.com/FelitaD/data-job-api)
-
-
-## Testing
+## Testing the project
 
 For individual pipelines tests see their respective repositories.
 
@@ -118,15 +109,35 @@ Data quality is the goal of the next section.
   - Only id, url, title and company have the `NOT NULL` constraint
   - Check other fields in `tests/missing_values.sql`
 
-### Monitoring
-
-To be completed.
-
 ### Unit Testing
 
 Pytest
 - Crawler coverage
 - ETL coverage
+
+## Pipelines
+
+### Ingestion pull pipeline
+
+[data-job-crawler](https://github.com/FelitaD/data-job-crawler) 
+
+![img](docs/ingestion_data_flow.jpg)
+
+A first spider designed to parse Javascript pages gathers links to job postings. 
+They are stored in S3 then fed to a 2nd spider. 
+The final scraped items go through a pipeline writing into Postgres.
+Can be scaled with more websites.
+
+### ETL pipeline
+
+[data-job-etl](https://github.com/FelitaD/data-job-etl)
+
+![img](docs/etl_pipeline.jpg)
+
+### API pipeline
+
+[data-job-api](https://github.com/FelitaD/data-job-api)
+
 
 ## Data Lifecycle
 
@@ -166,22 +177,6 @@ Once transformed, the data is loaded in a new table without normalization. A fut
 ### Orchestration
 
 Airflow is run locally. Following best practices, the custom code is encapsulated in python packages then imported in the DAG.
-
-## How to run
-
-### Prerequesites
-
-- Setup environment 
-  - Activate venv and install requirements
-  - Execute `playwright install` to download chromium
-- Install Airflow with pypi: [official instructions](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html)
-- Create `job_market` database and export environment variables `JOB_MARKET_DB_USER` and `JOB_MARKET_DB_PWD`   
-
-### Run
-
-- ```airflow standalone``` will initialise Airflow database, make a user, and start all components (development phase).<br>  
-- Airflow UI is at `localhost:8080` with username `admin` and password in `standalone_admin_password.txt`
-- In DAGs tab, toggle on job-market-batch and trigger manually if not running.  
 
 
 [Back to top](#data-engineering-job-market)
