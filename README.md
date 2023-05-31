@@ -2,14 +2,15 @@
 
 Ingest, process, analyse and recommend new data engineer jobs from [Welcome to the Jungle website](https://www.welcometothejungle.com/fr/jobs?query=data%20engineer&page=1). 
 
-[Data Flow Miro board](https://miro.com/welcomeonboard/NUtFWUhHSTRoNU1uZG5IZVFBbFl1cUh1VXN4bGUxMmJkR3ZwNVNPa05nMHZRT1c3WWZ1a1JSR2hUd2lzdm1oanwzMDc0NDU3MzYxNTA0MTQ0MjcwfDI=?share_link_id=594368920393)
-![Mind map](https://github.com/FelitaD/job-market-batch/blob/main/docs/Mind%20Map.jpg)
-
 **Background**
 
 The initial problem for this project was to filter and analyse jobs based on technologies.  
 Data engineering can be technology-centered, but the focus of this project is to apply Platform and Pipeline concepts and best practices, 
-using Fundamentals of Data Engineering as a reference. 
+using O'Reilly *Fundamentals of Data Engineering* as a reference. 
+Below is the final Data Flow of the project.
+
+[Data Flow Miro board](https://miro.com/welcomeonboard/NUtFWUhHSTRoNU1uZG5IZVFBbFl1cUh1VXN4bGUxMmJkR3ZwNVNPa05nMHZRT1c3WWZ1a1JSR2hUd2lzdm1oanwzMDc0NDU3MzYxNTA0MTQ0MjcwfDI=?share_link_id=594368920393)
+![Mind map](https://github.com/FelitaD/job-market-batch/blob/main/docs/Mind%20Map.jpg)
 
 ****
 #### Documentation
