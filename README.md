@@ -1,24 +1,15 @@
 # Data Engineering Job Market
 
-This project is gathers new data engineer jobs and enriches them to serve either an analytics dashboard or a recommendation system.
+Ingest, process, analyse and recommend new data engineer jobs from [Welcome to the Jungle website](https://www.welcometothejungle.com/fr/jobs?query=data%20engineer&page=1). 
 
-**Objectives**
-
-1. Showcase skills for a data engineering interview
-2. Optimize job search
-
-**Data Flow** 
-![Mind map](https://github.com/FelitaD/job-market-batch/blob/main/docs/Mind%20Map.jpg)
 [Data Flow Miro board](https://miro.com/welcomeonboard/NUtFWUhHSTRoNU1uZG5IZVFBbFl1cUh1VXN4bGUxMmJkR3ZwNVNPa05nMHZRT1c3WWZ1a1JSR2hUd2lzdm1oanwzMDc0NDU3MzYxNTA0MTQ0MjcwfDI=?share_link_id=594368920393)
+![Mind map](https://github.com/FelitaD/job-market-batch/blob/main/docs/Mind%20Map.jpg)
 
 **Background**
 
-After finishing a bootcamp in 2022, I had a conception of data engineering very technology-centered. 
-Months later, thanks to O'Reilly's _Fundamentals of Data Engineering_, I have more clarity with the role, but the variety of technical skills is still a major consideration when applying to jobs. 
-
-The project will try to help getting a bigger picture of the technology landscape, as well as matching my profile with the fittest company. 
-
-[The 2023 MAD Landscape - Matt Turck at FirstMark](https://mattturck.com/mad2023/#more-1693)
+The initial problem for this project was to filter and analyse jobs based on technologies.  
+Data engineering can be technology-centered, but the focus of this project is to apply Platform and Pipeline concepts and best practices, 
+using Fundamentals of Data Engineering as a reference. 
 
 ****
 #### Documentation
