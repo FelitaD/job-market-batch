@@ -78,18 +78,16 @@ The recommended order for testing is the DAG file then individual tasks and back
 
 ### End-to-end Test
 
-- Look at latest job posting
-- Query `processed_jobs` table and compare results
+Ensure that the data flow is maintained. For this, we compare the jobs on the website and find them in successive tables before and after processing.
+1. Look at latest job postings
+2. Query `raw_jobs`, `processed_jobs`, `apply` table and compare results
 
 Example output :
-
 ![img.png](docs/output_junior_view.png)
-
-As seen in the 2nd record above, the job offer isn't for a data engineer. 
-Data quality is the goal of the next section.
 
 ### Data Quality Testing
 
+Sometimes even with a correct data flow, the jobs are not relevant. Other quality checks:
 - All technologies must be present 
   - Some technologies are written differently (eg. Google BigQuery, Google Big Query)
   - Have to be added manually in `config/definitions.py` from the ETL package
