@@ -62,7 +62,9 @@ C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 
 ## Testing the project
 
-For individual pipelines tests see their respective repositories.
+These tests comprise the project overall. 
+Individual pipelines [data-job-crawler](https://github.com/FelitaD/data-job-crawler) 
+and [data-job-etl](https://github.com/FelitaD/data-job-etl) have tests in their respective repositories.
 
 ### Airflow Tests
 
