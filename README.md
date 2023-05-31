@@ -17,6 +17,7 @@ Below is the final Data Flow of the project.
 - [Architecture](#architecture)
 - [Running the project](#running-the-project)
 - [Testing the project](#testing-the-project)
+  - [Airflow tests](#airflow-tests)
   - [End-to-end tests](#end-to-end-tests)
   - [Data quality testing](#data-quality-testing)
   - [Unit testing](#unit-testing)
@@ -66,7 +67,7 @@ For individual pipelines tests see their respective repositories.
 ### Airflow Tests
 
 Multiple errors can arise using Airflow. 
-The recommended order for testing is the DAG file then individual tasks and backfill taking account of dependencies.
+The recommended order for testing is the DAG file then individual tasks and finally backfill to take dependencies into account.
 - DAG file
 `python3 job_market_etl_dag.py`
 - Import time `time python3 job_market_etl_dag.py` (default max 30 seconds) 
@@ -78,16 +79,16 @@ The recommended order for testing is the DAG file then individual tasks and back
 
 ### End-to-end Test
 
-Ensure that the data flow is maintained. For this, we compare the jobs on the website and find them in successive tables before and after processing.
+Ensure that the data flow is maintained. For this, we compare jobs on the website and find them in successive tables before and after processing.
 1. Look at latest job postings
 2. Query `raw_jobs`, `processed_jobs`, `apply` table and compare results
 
-Example output :
+Example output in psql:
 ![img.png](docs/output_junior_view.png)
 
 ### Data Quality Testing
 
-Sometimes even with a correct data flow, the jobs are not relevant. Other quality checks:
+Even with a correct data flow, the data can lack relevance or accuracy. Some quality checks:
 - All technologies must be present 
   - Some technologies are written differently (eg. Google BigQuery, Google Big Query)
   - Have to be added manually in `config/definitions.py` from the ETL package
@@ -106,9 +107,9 @@ Sometimes even with a correct data flow, the jobs are not relevant. Other qualit
 
 ### Unit Testing
 
-Pytest
-- Crawler coverage
-- ETL coverage
+Using Pytest, the coverage is not optimum.
+The unit testing of the crawler is delicate because the web pages DOM changes regularly. 
+However, these errors are easily detectable.
 
 ## Pipelines
 
