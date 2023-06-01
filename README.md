@@ -64,7 +64,20 @@ C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 
 ## Results
 
-To be completed.
+The aim result is to enrich and refine a list of jobs considered interesting for the user's profile.
+
+The first step is to choose jobs that are attractive. Here a rating is given out of 10:
+![results_apply](docs/results_apply.png)
+
+Secondly, request the API by providing a list of id(s) for attractive jobs. The output is a job recommendation board with most similar jobs at the top:
+![results_api](docs/results_api.png)
+
+The weights of features influences the result, which are by default:
+- remote: 1
+- title: 0.8
+- stack: 0.8
+- text: 0.7
+- experience: 0.6
 
 ## Testing the project
 
@@ -185,6 +198,7 @@ Airflow is run locally with LocalExecutor. Following best practices, the custom 
 ## Improvements
 
 - Deploy API with Docker
-
+- Unit tests coverage
+- API web UI with more arguments such as feature weights
 
 [Back to top](#data-engineering-job-market)
