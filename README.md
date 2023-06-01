@@ -67,12 +67,13 @@ C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 The aim result is to enrich and refine a list of jobs considered interesting for the user's profile. 
 We narrowed down from 5000 jobs initially, to 1900 relevant and then a couple. 
 
-The first step is to choose jobs that are attractive. Here a rating is given out of 10:
+1. Choose jobs that are attractive. Here a rating is given out of 10:
 ![results_apply](docs/results_apply.png)
 
-Secondly, request the API by providing a list of id(s) for attractive jobs. The output is a job recommendation board with most similar jobs at the top:
+2. Request the API by providing a list of id(s) for attractive jobs. The output is a job recommendation board with most similar jobs at the top:
 ![results_api](docs/results_api.png)
 
+**Remark**
 The weights of features influences the result, which are by default:
 - remote: 1
 - title: 0.8
