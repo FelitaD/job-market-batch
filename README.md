@@ -16,6 +16,7 @@ Below is the final Data Flow of the project.
 
 - [Architecture](#architecture)
 - [Running the project](#running-the-project)
+- [Results](#results)
 - [Testing the project](#testing-the-project)
   - [Airflow tests](#airflow-tests)
   - [End-to-end tests](#end-to-end-tests)
@@ -32,6 +33,7 @@ Below is the final Data Flow of the project.
   - [Serving](#serving)
   - [Storage](#storage)
   - [Orchestration](#orchestration)
+- [Improvements](#improvements)
 
 
 ****
@@ -59,6 +61,10 @@ C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 - ```airflow standalone``` will initialise Airflow database, make a user, and start all components (development phase).<br>  
 - Airflow UI is at `localhost:8080` with username `admin` and password in `standalone_admin_password.txt`
 - In DAGs tab, toggle on job-market-batch and trigger manually if not running.  
+
+## Results
+
+To be completed.
 
 ## Testing the project
 
@@ -175,6 +181,10 @@ Once transformed, the data is loaded in a new table without normalization. A fut
 ### Orchestration
 
 Airflow is run locally with LocalExecutor. Following best practices, the custom code is encapsulated in python packages then imported in the DAG.
+
+## Improvements
+
+- Deploy API with Docker
 
 
 [Back to top](#data-engineering-job-market)
