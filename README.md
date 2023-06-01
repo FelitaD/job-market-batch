@@ -65,7 +65,7 @@ C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 ## Results
 
 The aim result is to enrich and refine a list of jobs considered interesting for the user's profile. 
-We narrowed down from 5000 jobs initially, to 1900 relevant and then a couple. 
+We narrowed down from 5000 jobs initially, to 1900 relevant and then apply to a couple of matching jobs. 
 
 1. Choose jobs that are attractive. Here a rating is given out of 10:
 ![results_apply](docs/results_apply.png)
@@ -74,6 +74,7 @@ We narrowed down from 5000 jobs initially, to 1900 relevant and then a couple.
 ![results_api](docs/results_api.png)
 
 **Remark**
+
 The weights of features influences the result, which are by default:
 - remote: 1
 - title: 0.8
