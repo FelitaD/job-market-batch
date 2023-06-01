@@ -64,7 +64,8 @@ C4 model diagrams: https://structurizr.com/workspace/79499/diagrams
 
 ## Results
 
-The aim result is to enrich and refine a list of jobs considered interesting for the user's profile.
+The aim result is to enrich and refine a list of jobs considered interesting for the user's profile. 
+We narrowed down from 5000 jobs initially, to 1900 relevant and then a couple. 
 
 The first step is to choose jobs that are attractive. Here a rating is given out of 10:
 ![results_apply](docs/results_apply.png)
