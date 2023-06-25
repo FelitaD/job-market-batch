@@ -45,15 +45,10 @@ with DAG(dag_id=dag_id,
         python_callable=main,
     )
 
-    rank = BashOperator(
-        task_id='rank',
-        bash_command='python3 /Users/donor/Library/Mobile\ Documents/com~apple~CloudDocs/PycharmProjects/data-job-etl/data_job_etl/rank.py'
-    )
-
     message = BashOperator(
         task_id='message',
         bash_command='python3 /Users/donor/Library/Mobile\ Documents/com~apple~CloudDocs/PycharmProjects/data-job-etl/data_job_etl/message.py'
     )
 
 
-wttj_links_spider >> upload_new_links >> wttj_spider >> create_tables >> etl >> rank >> message
+wttj_links_spider >> upload_new_links >> wttj_spider >> create_tables >> etl >> message
